@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".SignUp_accept">
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/signup"
+        android:textSize="25sp"
+        android:layout_marginTop="20sp"
+        android:layout_marginLeft="20sp"
+        android:layout_marginStart="20sp" />
+
+    <TextView
+        android:id="@+id/tv_accept_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/signup_accept"
+        android:textSize="20sp"
+        android:layout_marginTop="20sp"
+        android:layout_marginLeft="40sp"
+        android:layout_marginStart="40sp" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="336dp"
+        android:layout_height="323dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginBottom="50dp"
+
+        app:layout_constraintEnd_toStartOf="@+id/constraintLayout"
+        app:layout_constraintStart_toStartOf="@+id/constraintLayout">
+
+        <ScrollView
+            android:id="@+id/scrollView2"
+            android:layout_width="match_parent"
+            android:layout_height="103dp"
+            android:layout_marginEnd="4dp"
+            android:layout_marginRight="4dp"
+            app:layout_constraintBottom_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/linearLayout_acceptance"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/blahblah" />
+
+        </ScrollView>
+
+
+<!--        나중에 Recycler View 로 바꿔서 '모두 동의하기' 기능 구현      -->
+        <LinearLayout
+            android:id="@+id/linearLayout_acceptance"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="20dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/scrollView2">
+
+            <CheckBox
+                android:id="@+id/chk_service_accept"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:text="@string/signup_service_accept"
+                tools:layout_editor_absoluteX="16dp"
+                tools:layout_editor_absoluteY="119dp" />
+            <CheckBox
+                android:id="@+id/chk_service_location"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:text="@string/signup_service_location"
+                tools:layout_editor_absoluteX="16dp"
+                tools:layout_editor_absoluteY="119dp" />
+            <CheckBox
+                android:id="@+id/chk_personal_info"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:text="@string/signup_personal_info"
+                tools:layout_editor_absoluteX="16dp"
+                tools:layout_editor_absoluteY="119dp" />
+
+
+            <CheckBox
+                android:id="@+id/chk_check_all"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:text="@string/signup_checkAll"
+                android:layout_gravity="right"
+                tools:layout_editor_absoluteX="16dp"
+                tools:layout_editor_absoluteY="119dp" />
+
+
+        </LinearLayout>
+
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <android.widget.Button
+        android:id="@+id/btn_gosignup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/signup"
+        android:background="@android:color/darker_gray"
+        android:layout_gravity="center_horizontal" />
+
+</LinearLayout>
