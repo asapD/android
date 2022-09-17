@@ -33,6 +33,13 @@
     <string name="signup_fin">회원 가입 완료</string>
     <string name="signup_fin_ment">회원 가입이 완료 되었습니다</string>
     <string name="signup_to_login">로그인 하러 가기</string>
+    <string name="navigation_bottom_home">홈</string>
+    <string name="navigation_bottom_search">검색</string>
+    <string name="navigation_bottom_basket">장바구니</string>
+    <string name="navigation_bottom_orderlist">주문 내역</string>
+    <string name="navigation_bottom_mypage">마이페이지</string>
 
     <string name="blahblah">약관 내용 blah blah ~~약관 내용 blah blah ~~약관 내용 blah blah ~~약관 내용 blah blah ~~약관 내용 blah blah ~~약관 내용 blah blah ~~약관 내용 blah blah ~~약관 내용 blah blah ~~약관 내용 blah blah ~~약관 내용 blah blah ~~약관 내용 blah blah ~~약관 내용 blah blah ~~약관 내용 blah blah ~~약관 내용 blah blah ~~약관 내용 blah blah ~~약관 내용 blah blah ~~약관 내용 blah blah ~~약관 내용 blah blah ~~약관 내용 blah blah ~~약관 내용 blah blah ~~약관 내용 blah blah ~~약관 내용 blah blah ~~약관 내용 blah blah ~~약관 내용 blah blah ~~약관 내용 blah blah ~~약관 내용 blah blah ~~약관 내용 blah blah ~~약관 내용 blah blah ~~약관 내용 blah blah ~~약관 내용 blah blah ~~</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
