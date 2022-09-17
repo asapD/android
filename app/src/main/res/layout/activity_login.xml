@@ -14,7 +14,7 @@
     <EditText
         android:id="@+id/et_userid"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="96dp"
         android:layout_marginEnd="24dp"
@@ -23,12 +23,13 @@
         android:selectAllOnFocus="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:autofillHints="" />
 
     <EditText
         android:id="@+id/et_userpw"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="24dp"
@@ -39,7 +40,8 @@
         android:selectAllOnFocus="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_userid" />
+        app:layout_constraintTop_toBottomOf="@+id/et_userid"
+        android:autofillHints="" />
 
     <android.widget.Button
         android:id="@+id/btn_signin"
@@ -63,13 +65,12 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="100dp"
-        android:layout_marginLeft="130dp"
         android:layout_marginEnd="100dp"
         android:layout_marginRight="130dp"
-        android:layout_marginBottom="159dp"
+        android:layout_marginBottom="100dp"
         android:gravity="center"
         android:text="아직 회원이 아니신가요?"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/btn_signup"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -77,13 +78,12 @@
         android:id="@+id/btn_signup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="56dp"
-        android:layout_marginEnd="44dp"
-        android:layout_marginRight="44dp"
-        android:text="Sign up"
         android:background="#D1D1D1"
-        app:layout_constraintEnd_toEndOf="@+id/textView"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        android:text="Sign up"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+         />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
