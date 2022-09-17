@@ -15,7 +15,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 
-import com.example.asapd.HomePage;
+import com.example.asapd.HomePageActivity;
 import com.example.asapd.R;
 import com.example.asapd.SignUp_accept;
 
@@ -59,7 +59,7 @@ public class LoginActivity extends AppCompatActivity {
         btn_signin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), HomePage.class);
+                Intent intent = new Intent(getApplicationContext(), HomePageActivity.class);
 
 
                 // 서버 통신
