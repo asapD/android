@@ -14,6 +14,7 @@
             android:name=".QRCodeActivity"
             android:exported="false" />
         <activity android:name=".HomePageActivity" />
+        <activity android:name=".FinishCharge"/>
         <activity android:name=".SignUp_fin" />
         <activity android:name=".SignUp_input" />
         <activity android:name=".SignUp_accept" />

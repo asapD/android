@@ -3,8 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_gravity="center"
-    tools:context=".MainMenuBasketFragment">
+    android:layout_gravity="center">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -16,11 +15,9 @@
             android:id="@+id/textView5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="20dp"
+            android:layout_gravity="center|top"
             android:gravity="center"
-            android:text="장바구니"
+            android:text="주문하기"
             android:textSize="20sp" />
 
         <View
@@ -31,6 +28,40 @@
             android:layout_marginTop="5dp"
             android:background="?android:attr/listDivider" />
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="82dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="255dp"
+                android:layout_height="47dp"
+                android:layout_marginLeft="10dp"
+                android:gravity="center|left"
+                android:text="배달 정보"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/textView7"
+                android:layout_width="match_parent"
+                android:layout_height="32dp"
+                android:layout_marginLeft="10dp"
+                android:gravity="center|left"
+                android:text="oo구 oo동 xx시 123-1"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/editTextTextPersonName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="상세 주소 입력"
+            android:inputType="textPersonName"
+            tools:ignore="TouchTargetSizeCheck" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"
             android:layout_width="match_parent"
@@ -38,10 +69,12 @@
             android:layout_gravity="center"
             android:layout_marginStart="10dp"
             android:layout_marginLeft="10dp"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="5dp"
             android:layout_marginEnd="10dp"
             android:layout_marginRight="10dp"
-            android:layout_marginBottom="100dp" />
+            android:layout_marginBottom="100dp">
+
+        </androidx.recyclerview.widget.RecyclerView>
 
         <Button
             android:id="@+id/btn_charge"
@@ -50,7 +83,7 @@
             android:layout_gravity="right"
             android:layout_marginTop="-100dp"
             android:layout_marginEnd="10dp"
-            android:text="주문하기"
+            android:text="결제하기"
             tools:ignore="TouchTargetSizeCheck" />
 
     </LinearLayout>

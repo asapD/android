@@ -1,26 +1,19 @@
 package com.example.asapd;
 
+import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import java.util.ArrayList;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link MainMenuBasketFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class MainMenuBasketFragment extends Fragment {
-
+public class OrderFragment extends Fragment {
 
     private RecyclerView mRecyclerView;
     private RecyclerAdapter mRecyclerAdapter;
@@ -36,7 +29,7 @@ public class MainMenuBasketFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public MainMenuBasketFragment(){
+    public OrderFragment(){
         // Required empty public constructor
     }
 
@@ -71,7 +64,7 @@ public class MainMenuBasketFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        ViewGroup rootView = (ViewGroup)inflater.inflate(R.layout.fragment_main_menu_basket, container, false);
+        ViewGroup rootView = (ViewGroup)inflater.inflate(R.layout.fragment_order_info, container, false);
 
         btn = rootView.findViewById(R.id.btn_charge);
 
@@ -86,10 +79,9 @@ public class MainMenuBasketFragment extends Fragment {
 
             @Override
             public void onClick(View v) {
-                FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-                OrderFragment orderFragment = new OrderFragment();
-                transaction.replace(R.id.menu_frame_layout, orderFragment);
-                transaction.commit();
+                Intent intent = new Intent(getActivity(), FinishCharge.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                startActivity(intent);
             }
         });
         return rootView;
