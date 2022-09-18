@@ -8,7 +8,7 @@ android {
 
     defaultConfig {
         applicationId "com.example.asapd"
-        minSdkVersion 16
+        minSdkVersion 19
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
@@ -50,4 +50,7 @@ dependencies {
     implementation 'androidx.navigation:navigation-fragment:2.3.2'
     implementation 'androidx.navigation:navigation-ui:2.3.2'
     implementation 'com.google.android.material:material:1.0.0'
+    implementation ('com.journeyapps:zxing-android-embedded:4.3.0') { transitive = false }
+    implementation 'com.google.zxing:core:3.3.2'
+
 }
