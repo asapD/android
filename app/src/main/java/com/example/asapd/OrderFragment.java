@@ -42,8 +42,8 @@ public class OrderFragment extends Fragment {
      * @return A new instance of fragment MainMenuOrderlistFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static MainMenuOrderlistFragment newInstance(String param1, String param2) {
-        MainMenuOrderlistFragment fragment = new MainMenuOrderlistFragment();
+    public static OrderFragment newInstance(String param1, String param2) {
+        OrderFragment fragment = new OrderFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);

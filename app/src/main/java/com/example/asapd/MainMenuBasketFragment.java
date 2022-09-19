@@ -49,8 +49,8 @@ public class MainMenuBasketFragment extends Fragment {
      * @return A new instance of fragment MainMenuOrderlistFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static MainMenuOrderlistFragment newInstance(String param1, String param2) {
-        MainMenuOrderlistFragment fragment = new MainMenuOrderlistFragment();
+    public static MainMenuBasketFragment newInstance(String param1, String param2) {
+        MainMenuBasketFragment fragment = new MainMenuBasketFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
