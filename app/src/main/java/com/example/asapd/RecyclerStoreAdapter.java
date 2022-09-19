@@ -8,34 +8,31 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
-import java.util.ConcurrentModificationException;
 
-public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHolder> {
-
-    private ArrayList<ItemData> mList =  new ArrayList<>();
+public class RecyclerStoreAdapter extends RecyclerView.Adapter<RecyclerStoreAdapter.ViewHolder>{
+    private ArrayList<StoreData> mList =  new ArrayList<>();
     private Context context;
 
-    public RecyclerAdapter(Context context, ArrayList<ItemData> mList) {
+    public RecyclerStoreAdapter(Context context, ArrayList<StoreData> mList) {
         this.context = context;
         this.mList = mList;
     }
 
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_list, parent, false);
-        return new ViewHolder(view);
+    public RecyclerStoreAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.store_list, parent, false);
+        return new RecyclerStoreAdapter.ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull RecyclerStoreAdapter.ViewHolder holder, int position) {
         holder.onBind(mList.get(position));
     }
 
-    public void setItemList(ArrayList<ItemData> list){
+    public void setItemList(ArrayList<StoreData> list){
         this.mList = list;
         notifyDataSetChanged();
     }
@@ -57,7 +54,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
             content = (TextView) itemView.findViewById(R.id.content);
         }
 
-        void onBind(ItemData item){
+        void onBind(StoreData item){
             profile.setImageResource(item.getResId());
             title.setText(item.getTitle());
             content.setText(item.getContent());

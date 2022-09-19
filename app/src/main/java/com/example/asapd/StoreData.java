@@ -2,12 +2,12 @@ package com.example.asapd;
 
 import java.util.ArrayList;
 
-public class ItemData {
+public class StoreData {
     int resId; //이미지 데이터
     String name;
     String content;
 
-    public ItemData(int resId, String title, String content) {
+    public StoreData(int resId, String title, String content) {
         this.resId = resId;
         this.name= title;
         this.content = content;
@@ -37,11 +37,11 @@ public class ItemData {
         this.resId = resId;
     }
 
-    public static ArrayList<ItemData> createList(int num){
-        ArrayList<ItemData> list = new ArrayList<ItemData>();
+    public static ArrayList<StoreData> createList(int num){
+        ArrayList<StoreData> list = new ArrayList<StoreData>();
 
         for(int i = 1; i <= num; i++){
-            list.add(new ItemData(R.drawable.item,"item", "content"));
+            list.add(new StoreData(R.drawable.store,"item", "content"));
         }
         return list;
     }

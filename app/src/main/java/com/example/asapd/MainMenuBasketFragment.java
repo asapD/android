@@ -23,7 +23,7 @@ public class MainMenuBasketFragment extends Fragment {
 
 
     private RecyclerView mRecyclerView;
-    private RecyclerAdapter mRecyclerAdapter;
+    private RecyclerItemAdapter mRecyclerAdapter;
     private ArrayList<ItemData> mList;
     private Button btn;
 
@@ -78,7 +78,7 @@ public class MainMenuBasketFragment extends Fragment {
         mRecyclerView = (RecyclerView) rootView.findViewById(R.id.recyclerView);
         mList = ItemData.createList(5);
         mRecyclerView.setHasFixedSize(true);
-        mRecyclerAdapter = new RecyclerAdapter(getActivity(),mList);
+        mRecyclerAdapter = new RecyclerItemAdapter(getActivity(),mList);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mRecyclerView.setAdapter(mRecyclerAdapter);
 

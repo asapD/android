@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +17,8 @@ import android.widget.Button;
  * create an instance of this fragment.
  */
 public class MainMenuHomeFragment extends Fragment {
+
+//    private Button btn;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -67,6 +70,7 @@ public class MainMenuHomeFragment extends Fragment {
         // Inflate the layout for this fragment
         inflatedView = inflater.inflate(R.layout.fragment_main_menu_home, container, false);
         btn_toQRPage = inflatedView.findViewById(R.id.btn_toQRPage);
+//        btn = inflatedView.findViewById(R.id.btn_store);
 
         btn_toQRPage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,7 +79,17 @@ public class MainMenuHomeFragment extends Fragment {
                 startActivity(intent);
             }
         });
-
+// 카테고리 버튼 누르면 가게 리스트로 이동 테스트
+//        btn.setOnClickListener(new View.OnClickListener(){
+//
+//            @Override
+//            public void onClick(View v) {
+//                FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+//                StoreListFragment storeListFragment = new StoreListFragment();
+//                transaction.replace(R.id.menu_frame_layout, storeListFragment);
+//                transaction.commit();
+//            }
+//        });
         return inflatedView;
     }
 
