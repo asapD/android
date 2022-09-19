@@ -1,10 +1,11 @@
 package com.example.asapd;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
@@ -14,12 +15,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-public class StoreItemFragment extends Fragment {
+public class ItemInfoFragment extends Fragment {
 
-
-    private RecyclerView mRecyclerView;
-    private RecyclerItemAdapter mRecyclerAdapter;
-    private ArrayList<ItemData> mList;
+    private int count = 0;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -30,7 +28,7 @@ public class StoreItemFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public StoreItemFragment(){
+    public ItemInfoFragment() {
         // Required empty public constructor
     }
 
@@ -43,8 +41,8 @@ public class StoreItemFragment extends Fragment {
      * @return A new instance of fragment MainMenuOrderlistFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static StoreItemFragment newInstance(String param1, String param2) {
-        StoreItemFragment fragment = new StoreItemFragment();
+    public static ItemInfoFragment newInstance(String param1, String param2) {
+        ItemInfoFragment fragment = new ItemInfoFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -65,34 +63,43 @@ public class StoreItemFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        ViewGroup rootView = (ViewGroup)inflater.inflate(R.layout.fragment_store_itemlist, container, false);
-        mRecyclerView = (RecyclerView) rootView.findViewById(R.id.recyclerView);
-        mList = ItemData.createList(5);
-        mRecyclerView.setHasFixedSize(true);
-        mRecyclerAdapter = new RecyclerItemAdapter(getActivity(),mList);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        mRecyclerView.setAdapter(mRecyclerAdapter);
+        ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_item_info, container, false);
 
-        mRecyclerAdapter.setOnItemClickListener(new RecyclerStoreAdapter.OnItemClickListener() {
+        Button btn_m = rootView.findViewById(R.id.btn_minus);
+        Button btn_p = rootView.findViewById(R.id.btn_plus);
+        TextView tvCount =  rootView.findViewById(R.id.count);
+        Button btn = rootView.findViewById(R.id.btn_basket);
+
+        tvCount.setText(count+"");
+
+        btn_m.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onItemClicked(View v, int pos) {
-                Bundle bundle = new Bundle();
-                bundle.putInt("resId", mList.get(pos).getResId());
-                bundle.putString("name", mList.get(pos).getTitle());
-                FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-               ItemInfoFragment itemInfoFragment = new ItemInfoFragment();
-                transaction.replace(R.id.menu_frame_layout, itemInfoFragment);
-                transaction.commit();
+            public void onClick(View v) {
+                if(count > 0) {
+                    count--;
+                    tvCount.setText(count + "");
+                }
             }
         });
 
+        btn_p.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                count++;
+                tvCount.setText(count+"");
+            }
+        });
 
-        TextView store_name = rootView.findViewById(R.id.store_name);
-        if(getArguments() != null)
-        {
-            String name = getArguments().getString("title");
-            store_name.setText(name);
-        }
+        btn.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+                StoreItemFragment storeItemFragment = new StoreItemFragment();
+                transaction.replace(R.id.menu_frame_layout, storeItemFragment);
+                transaction.commit();
+            }
+        });
         return rootView;
 
     }
