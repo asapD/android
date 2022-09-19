@@ -3,10 +3,15 @@ package com.example.asapd;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.SearchView;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -14,6 +19,10 @@ import android.view.ViewGroup;
  * create an instance of this fragment.
  */
 public class MainMenuSearchFragment extends Fragment {
+
+    private RecyclerView mRecyclerView;
+    private RecyclerItemAdapter mRecyclerAdapter;
+    private ArrayList<ItemData> mList;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -59,6 +68,15 @@ public class MainMenuSearchFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_main_menu_search, container, false);
+        ViewGroup rootView = (ViewGroup)inflater.inflate(R.layout.fragment_main_menu_search, container, false);
+        mRecyclerView = (RecyclerView) rootView.findViewById(R.id.recyclerView);
+
+        mList = ItemData.createList(5);
+        mRecyclerView.setHasFixedSize(true);
+        mRecyclerAdapter = new RecyclerItemAdapter(getActivity(),mList);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        mRecyclerView.setAdapter(mRecyclerAdapter);
+
+        return rootView;
     }
 }

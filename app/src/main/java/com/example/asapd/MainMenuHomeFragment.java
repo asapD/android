@@ -79,7 +79,7 @@ public class MainMenuHomeFragment extends Fragment {
                 startActivity(intent);
             }
         });
-//// 카테고리 버튼 누르면 가게 리스트로 이동 테스트
+// 카테고리 버튼 누르면 가게 리스트로 이동 테스트
 //        btn.setOnClickListener(new View.OnClickListener(){
 //
 //            @Override
