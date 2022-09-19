@@ -21,6 +21,17 @@ public class RecyclerStoreAdapter extends RecyclerView.Adapter<RecyclerStoreAdap
         this.mList = mList;
     }
 
+    private OnItemClickListener itemClickListener;
+
+    public interface OnItemClickListener{
+        void onItemClicked(View v, int pos);
+    }
+
+
+    public void setOnItemClickListener(OnItemClickListener listener){
+        itemClickListener = listener;
+    }
+
     @Override
     public RecyclerStoreAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.store_list, parent, false);
@@ -42,7 +53,7 @@ public class RecyclerStoreAdapter extends RecyclerView.Adapter<RecyclerStoreAdap
         return mList.size();
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder {
         ImageView profile;
         TextView title;
         TextView content;
@@ -52,6 +63,18 @@ public class RecyclerStoreAdapter extends RecyclerView.Adapter<RecyclerStoreAdap
             profile = (ImageView) itemView.findViewById(R.id.profile);
             title = (TextView) itemView.findViewById(R.id.name);
             content = (TextView) itemView.findViewById(R.id.content);
+
+            itemView.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View v){
+                    int pos = getAdapterPosition();
+                    if(pos != RecyclerView.NO_POSITION){
+                        if(itemClickListener != null){
+                            itemClickListener.onItemClicked(v,pos);
+                        }
+                    }
+                }
+            });
         }
 
         void onBind(StoreData item){
@@ -60,4 +83,5 @@ public class RecyclerStoreAdapter extends RecyclerView.Adapter<RecyclerStoreAdap
             content.setText(item.getContent());
         }
     }
+
 }

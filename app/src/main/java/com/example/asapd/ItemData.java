@@ -1,6 +1,8 @@
 package com.example.asapd;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class ItemData {
     int resId; //이미지 데이터
@@ -36,6 +38,10 @@ public class ItemData {
     public void setResId(int resId) {
         this.resId = resId;
     }
+
+    List<Integer> listResId = Arrays.asList(
+            R.drawable.item
+    );
 
     public static ArrayList<ItemData> createList(int num){
         ArrayList<ItemData> list = new ArrayList<ItemData>();

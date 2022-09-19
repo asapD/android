@@ -4,18 +4,21 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-public class StoreListFragment extends Fragment {
+public class StoreItemFragment extends Fragment {
+
+
     private RecyclerView mRecyclerView;
-    private RecyclerStoreAdapter mRecyclerAdapter;
-    private ArrayList<StoreData> mList;
+    private RecyclerItemAdapter mRecyclerAdapter;
+    private ArrayList<ItemData> mList;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -26,7 +29,7 @@ public class StoreListFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public  StoreListFragment(){
+    public StoreItemFragment(){
         // Required empty public constructor
     }
 
@@ -39,8 +42,8 @@ public class StoreListFragment extends Fragment {
      * @return A new instance of fragment MainMenuOrderlistFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static StoreListFragment newInstance(String param1, String param2) {
-        StoreListFragment fragment = new StoreListFragment();
+    public static StoreItemFragment newInstance(String param1, String param2) {
+        StoreItemFragment fragment = new StoreItemFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -61,27 +64,20 @@ public class StoreListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_store_list, container, false);
+        ViewGroup rootView = (ViewGroup)inflater.inflate(R.layout.fragment_store_itemlist, container, false);
         mRecyclerView = (RecyclerView) rootView.findViewById(R.id.recyclerView);
-
-        mList = StoreData.createList(5);
+        mList = ItemData.createList(5);
         mRecyclerView.setHasFixedSize(true);
-        mRecyclerAdapter = new RecyclerStoreAdapter(getActivity(), mList);
+        mRecyclerAdapter = new RecyclerItemAdapter(getActivity(),mList);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mRecyclerView.setAdapter(mRecyclerAdapter);
-        mRecyclerAdapter.setOnItemClickListener(new RecyclerStoreAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClicked(View v, int pos) {
-                Bundle bundle = new Bundle();
-                bundle.putInt("resId", mList.get(pos).getResId());
-                bundle.putString("name", mList.get(pos).getTitle());
-                FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-                StoreItemFragment storeItemFragment = new StoreItemFragment();
-                transaction.replace(R.id.menu_frame_layout, storeItemFragment);
-                transaction.commit();
-            }
-        });
 
+        TextView store_name = rootView.findViewById(R.id.store_name);
+        if(getArguments() != null)
+        {
+            String name = getArguments().getString("title");
+            store_name.setText(name);
+        }
         return rootView;
 
     }

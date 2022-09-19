@@ -1,6 +1,8 @@
 package com.example.asapd;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class StoreData {
     int resId; //이미지 데이터
@@ -37,11 +39,15 @@ public class StoreData {
         this.resId = resId;
     }
 
+    List<Integer> listResId = Arrays.asList(
+            R.drawable.store
+    );
+
     public static ArrayList<StoreData> createList(int num){
         ArrayList<StoreData> list = new ArrayList<StoreData>();
 
         for(int i = 1; i <= num; i++){
-            list.add(new StoreData(R.drawable.store,"item", "content"));
+            list.add(new StoreData( R.drawable.store,"item", "content"));
         }
         return list;
     }
