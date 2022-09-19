@@ -39,6 +39,15 @@
     <string name="navigation_bottom_orderlist">주문 내역</string>
     <string name="navigation_bottom_mypage">마이페이지</string>
     <string name="Scan_QR_to_Scanner">QR 코드를 스캐너 장치에 인식 해 주세요</string>
+    <string name="category">카테고리</string>
+    <string name="fruit">과일</string>
+    <string name="vegetable">야채</string>
+    <string name="fish">생선</string>
+    <string name="meat">고기</string>
+    <string name="book">도서</string>
+    <string name="life">생필품</string>
+    <string name="convenience_store">편의점</string>
+    <string name="stationary">문구류</string>
 
     <string name="blahblah">약관 내용 blah blah ~~약관 내용 blah blah ~~약관 내용 blah blah ~~약관 내용 blah blah ~~약관 내용 blah blah ~~약관 내용 blah blah ~~약관 내용 blah blah ~~약관 내용 blah blah ~~약관 내용 blah blah ~~약관 내용 blah blah ~~약관 내용 blah blah ~~약관 내용 blah blah ~~약관 내용 blah blah ~~약관 내용 blah blah ~~약관 내용 blah blah ~~약관 내용 blah blah ~~약관 내용 blah blah ~~약관 내용 blah blah ~~약관 내용 blah blah ~~약관 내용 blah blah ~~약관 내용 blah blah ~~약관 내용 blah blah ~~약관 내용 blah blah ~~약관 내용 blah blah ~~약관 내용 blah blah ~~약관 내용 blah blah ~~약관 내용 blah blah ~~약관 내용 blah blah ~~약관 내용 blah blah ~~약관 내용 blah blah ~~</string>
     <!-- TODO: Remove or change this placeholder text -->

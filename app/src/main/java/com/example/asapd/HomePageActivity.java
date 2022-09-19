@@ -30,10 +30,10 @@ public class HomePageActivity extends AppCompatActivity {
         transaction.replace(R.id.menu_frame_layout, homeFragment).commitAllowingStateLoss();
 
         NavigationBarView bottomNavigationView = findViewById(R.id.menu_bottom_navigation);
-        bottomNavigationView.setOnItemSelectedListener(new ItemSelectedListner());
+        bottomNavigationView.setOnItemSelectedListener(new ItemSelectedListener());
     }
 
-    class ItemSelectedListner implements NavigationBarView.OnItemSelectedListener {
+    class ItemSelectedListener implements NavigationBarView.OnItemSelectedListener {
 
         @Override
         public boolean onNavigationItemSelected(@NonNull @NotNull MenuItem item) {
@@ -58,4 +58,5 @@ public class HomePageActivity extends AppCompatActivity {
             return true;
         }
     }
+
 }

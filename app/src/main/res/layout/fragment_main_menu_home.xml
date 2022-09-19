@@ -1,24 +1,175 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainMenuHomeFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/title_home"
-        android:gravity="center"
-        android:textSize="50sp"/>
+        android:layout_height="wrap_content">
 
-    <Button
-        android:id="@+id/btn_toQRPage"
-        android:layout_width="wrap_content"
+        <android.widget.Button
+            android:id="@+id/btn_to_RealtimeLocation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:text="실시간 위치"/>
+
+        <android.widget.ImageView
+            android:id="@+id/img_logo"
+            android:layout_width="146dp"
+            android:layout_height="93dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:orientation="vertical"
+            android:src="@mipmap/pablo_logo"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/btn_toQRPage"
+            app:layout_constraintStart_toEndOf="@id/btn_to_RealtimeLocation"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <android.widget.Button
+            android:id="@+id/btn_toQRPage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:text="QRCode"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <HorizontalScrollView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="QRCode로 이동"
-        android:layout_gravity="right"/>
+        android:layout_marginTop="100dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/ib_banner1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/pablo_logo"/>
+            <ImageButton
+                android:id="@+id/ib_banner2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/pablo_logo"/>
+            <ImageButton
+                android:id="@+id/ib_banner3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/pablo_logo"/>
+            <ImageButton
+                android:id="@+id/ib_banner4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/pablo_logo"/>
+
+        </LinearLayout>
+    </HorizontalScrollView>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="300dp">
+
+        <TextView
+            android:id="@+id/tv_category"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/category"
+            android:layout_marginLeft="20dp"/>
+
+        <LinearLayout
+            android:id="@+id/ln_upper"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/tv_category"
+            android:gravity="center">
+
+            <android.widget.Button
+                android:id="@+id/btn_fruit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/fruit"/>
+
+            <android.widget.Button
+                android:id="@+id/btn_vegetable"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/vegetable"/>
+
+
+            <android.widget.Button
+                android:id="@+id/btn_fish"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/fish"/>
+
+            <android.widget.Button
+                android:id="@+id/btn_meat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/meat"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ln_lower"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/ln_upper"
+            android:gravity="center">
+
+            <android.widget.Button
+                android:id="@+id/btn_book"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/book"/>
+
+            <android.widget.Button
+                android:id="@+id/btn_life"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/life"/>
+
+
+            <android.widget.Button
+                android:id="@+id/btn_convenience_store"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/convenience_store"/>
+
+            <android.widget.Button
+                android:id="@+id/btn_stationary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/stationary"/>
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+<!--    <androidx.recyclerview.widget.RecyclerView-->
+<!--        android:id="@+id/rcv_main"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginTop="450dp"/>-->
+
+
+
 
 
 </FrameLayout>
