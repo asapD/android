@@ -39,15 +39,11 @@ public class ItemData {
         this.resId = resId;
     }
 
-    List<Integer> listResId = Arrays.asList(
-            R.drawable.item
-    );
-
     public static ArrayList<ItemData> createList(int num){
         ArrayList<ItemData> list = new ArrayList<ItemData>();
 
         for(int i = 1; i <= num; i++){
-            list.add(new ItemData(R.drawable.item,"item", "content"));
+            list.add(new ItemData(R.drawable.item,"item" + i, "content"));
         }
         return list;
     }

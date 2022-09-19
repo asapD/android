@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -71,6 +72,20 @@ public class StoreItemFragment extends Fragment {
         mRecyclerAdapter = new RecyclerItemAdapter(getActivity(),mList);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mRecyclerView.setAdapter(mRecyclerAdapter);
+
+        mRecyclerAdapter.setOnItemClickListener(new RecyclerStoreAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClicked(View v, int pos) {
+                Bundle bundle = new Bundle();
+                bundle.putInt("resId", mList.get(pos).getResId());
+                bundle.putString("name", mList.get(pos).getTitle());
+                FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+               ItemInfoFragment itemInfoFragment = new ItemInfoFragment();
+                transaction.replace(R.id.menu_frame_layout, itemInfoFragment);
+                transaction.commit();
+            }
+        });
+
 
         TextView store_name = rootView.findViewById(R.id.store_name);
         if(getArguments() != null)

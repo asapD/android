@@ -24,6 +24,17 @@ public class RecyclerItemAdapter extends RecyclerView.Adapter<RecyclerItemAdapte
         this.mList = mList;
     }
 
+    private RecyclerStoreAdapter.OnItemClickListener itemClickListener;
+
+    public interface OnItemClickListener{
+        void onItemClicked(View v, int pos);
+    }
+
+
+    public void setOnItemClickListener(RecyclerStoreAdapter.OnItemClickListener listener){
+        itemClickListener = listener;
+    }
+
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_list, parent, false);
@@ -55,6 +66,18 @@ public class RecyclerItemAdapter extends RecyclerView.Adapter<RecyclerItemAdapte
             profile = (ImageView) itemView.findViewById(R.id.profile);
             title = (TextView) itemView.findViewById(R.id.name);
             content = (TextView) itemView.findViewById(R.id.content);
+
+            itemView.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View v){
+                    int pos = getAdapterPosition();
+                    if(pos != RecyclerView.NO_POSITION){
+                        if(itemClickListener != null){
+                            itemClickListener.onItemClicked(v,pos);
+                        }
+                    }
+                }
+            });
         }
 
         void onBind(ItemData item){

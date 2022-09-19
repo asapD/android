@@ -2,23 +2,22 @@ package com.example.asapd;
 
 import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link MainMenuHomeFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class MainMenuHomeFragment extends Fragment {
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
-    private Button btn;
+import java.util.ArrayList;
+
+public class ItemInfoFragment extends Fragment {
+
+    private int count = 0;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -29,10 +28,7 @@ public class MainMenuHomeFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    private Button btn_toQRPage;
-    private View inflatedView = null;
-
-    public MainMenuHomeFragment() {
+    public ItemInfoFragment() {
         // Required empty public constructor
     }
 
@@ -42,11 +38,11 @@ public class MainMenuHomeFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment MainMenuHomeFragment.
+     * @return A new instance of fragment MainMenuOrderlistFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static MainMenuHomeFragment newInstance(String param1, String param2) {
-        MainMenuHomeFragment fragment = new MainMenuHomeFragment();
+    public static ItemInfoFragment newInstance(String param1, String param2) {
+        ItemInfoFragment fragment = new ItemInfoFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -61,38 +57,50 @@ public class MainMenuHomeFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        inflatedView = inflater.inflate(R.layout.fragment_main_menu_home, container, false);
-        btn_toQRPage = inflatedView.findViewById(R.id.btn_toQRPage);
-        btn = inflatedView.findViewById(R.id.btn_store);
+        ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_item_info, container, false);
 
-        btn_toQRPage.setOnClickListener(new View.OnClickListener() {
+        Button btn_m = rootView.findViewById(R.id.btn_minus);
+        Button btn_p = rootView.findViewById(R.id.btn_plus);
+        TextView tvCount =  rootView.findViewById(R.id.count);
+        Button btn = rootView.findViewById(R.id.btn_basket);
+
+        tvCount.setText(count+"");
+
+        btn_m.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(), QRCodeActivity.class);
-                startActivity(intent);
+                if(count > 0) {
+                    count--;
+                    tvCount.setText(count + "");
+                }
             }
         });
-// 카테고리 버튼 누르면 가게 리스트로 이동 테스트
+
+        btn_p.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                count++;
+                tvCount.setText(count+"");
+            }
+        });
+
         btn.setOnClickListener(new View.OnClickListener(){
 
             @Override
             public void onClick(View v) {
                 FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-                StoreListFragment storeListFragment = new StoreListFragment();
-                transaction.replace(R.id.menu_frame_layout, storeListFragment);
+                StoreItemFragment storeItemFragment = new StoreItemFragment();
+                transaction.replace(R.id.menu_frame_layout, storeItemFragment);
                 transaction.commit();
             }
         });
-        return inflatedView;
+        return rootView;
+
     }
-
-
-
 }
