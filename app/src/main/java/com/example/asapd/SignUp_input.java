@@ -20,10 +20,8 @@ public class SignUp_input extends AppCompatActivity {
         setContentView(R.layout.activity_sign_up_input);
 
         et_name = findViewById(R.id.et_name);
-        et_id = findViewById(R.id.et_id);
         et_pw = findViewById(R.id.et_pw);
         et_re_pw = findViewById(R.id.et_re_pw);
-        et_birth = findViewById(R.id.et_birth);
         et_email = findViewById(R.id.et_email);
         et_phone = findViewById(R.id.et_phone);
         et_authCode = findViewById(R.id.et_authCode);
@@ -39,6 +37,7 @@ public class SignUp_input extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // 전화번호 인증 요청 to server
+
 
             }
         });

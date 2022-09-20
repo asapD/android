@@ -63,21 +63,41 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
                 android:layout_marginTop="15dp"
-                android:text="@string/signup_ID"
+                android:text="@string/signup_email"
                 android:textSize="15sp"
                 android:layout_marginStart="15dp" />
 
             <EditText
-                android:id="@+id/et_id"
+                android:id="@+id/et_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
                 android:background="#D3D3D3"
-                android:hint="@string/signup_ID"
+                android:hint="@string/signup_email"
                 android:textSize="15sp"
-                android:inputType="text"
-                android:autofillHints="@string/signup_ID"/>
+                android:inputType="textEmailAddress" />
+
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginLeft="15dp"-->
+<!--                android:layout_marginTop="15dp"-->
+<!--                android:text="@string/signup_ID"-->
+<!--                android:textSize="15sp"-->
+<!--                android:layout_marginStart="15dp" />-->
+
+<!--            <EditText-->
+<!--                android:id="@+id/et_id"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginLeft="15dp"-->
+<!--                android:layout_marginRight="15dp"-->
+<!--                android:background="#D3D3D3"-->
+<!--                android:hint="@string/signup_ID"-->
+<!--                android:textSize="15sp"-->
+<!--                android:inputType="text"-->
+<!--                android:autofillHints="@string/signup_ID"/>-->
 
             <TextView
                 android:layout_width="wrap_content"
@@ -119,45 +139,27 @@
                 android:textSize="15sp"
                 android:inputType="text" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="15dp"
-                android:layout_marginTop="15dp"
-                android:text="@string/signup_birth"
-                android:textSize="15sp"
-                android:layout_marginStart="15dp" />
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginLeft="15dp"-->
+<!--                android:layout_marginTop="15dp"-->
+<!--                android:text="@string/signup_birth"-->
+<!--                android:textSize="15sp"-->
+<!--                android:layout_marginStart="15dp" />-->
 
-            <EditText
-                android:id="@+id/et_birth"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
-                android:background="#D3D3D3"
-                android:hint="@string/signup_birth"
-                android:textSize="15sp"
-                android:inputType="text" />
+<!--            <EditText-->
+<!--                android:id="@+id/et_birth"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginLeft="15dp"-->
+<!--                android:layout_marginRight="15dp"-->
+<!--                android:background="#D3D3D3"-->
+<!--                android:hint="@string/signup_birth"-->
+<!--                android:textSize="15sp"-->
+<!--                android:inputType="text" />-->
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="15dp"
-                android:layout_marginTop="15dp"
-                android:text="@string/signup_email"
-                android:textSize="15sp"
-                android:layout_marginStart="15dp" />
 
-            <EditText
-                android:id="@+id/et_email"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
-                android:background="#D3D3D3"
-                android:hint="@string/signup_email"
-                android:textSize="15sp"
-                android:inputType="textEmailAddress" />
 
             <TextView
                 android:layout_width="wrap_content"
