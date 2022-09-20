@@ -18,7 +18,7 @@
             android:layout_marginTop="20dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:text="실시간 위치"/>
+            android:text="@string/location"/>
 
         <android.widget.ImageView
             android:id="@+id/img_logo"

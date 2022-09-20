@@ -40,7 +40,7 @@ public class MainMenuHomeFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    private Button btn_toQRPage;
+    private Button btn_toQRPage, btn_to_RealtimeLocation;
     private View inflatedView = null;
 
     private Button btn_fruit, btn_vegetable, btn_fish, btn_meat;
@@ -84,6 +84,7 @@ public class MainMenuHomeFragment extends Fragment {
                              Bundle savedInstanceState) {
         inflatedView = inflater.inflate(R.layout.fragment_main_menu_home, container, false);
         btn_toQRPage = inflatedView.findViewById(R.id.btn_toQRPage);
+        btn_to_RealtimeLocation = inflatedView.findViewById(R.id.btn_to_RealtimeLocation);
 
         Fragment subFragment = new StoreListFragment();
         FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
@@ -93,6 +94,14 @@ public class MainMenuHomeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getContext(), QRCodeActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        btn_to_RealtimeLocation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), LocationActivity.class);
                 startActivity(intent);
             }
         });
