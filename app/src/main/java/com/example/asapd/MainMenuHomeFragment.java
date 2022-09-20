@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
@@ -32,6 +33,9 @@ public class MainMenuHomeFragment extends Fragment {
     private Button btn_toQRPage;
     private View inflatedView = null;
 
+    private Button btn_fruit, btn_vegetable, btn_fish, btn_meat;
+    private Button btn_book, btn_life, btn_convenience_store, btn_stationary;
+
     public MainMenuHomeFragment() {
         // Required empty public constructor
     }
@@ -57,6 +61,7 @@ public class MainMenuHomeFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
@@ -67,10 +72,12 @@ public class MainMenuHomeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         inflatedView = inflater.inflate(R.layout.fragment_main_menu_home, container, false);
         btn_toQRPage = inflatedView.findViewById(R.id.btn_toQRPage);
-//        btn = inflatedView.findViewById(R.id.btn_store);
+
+        Fragment subFragment = new StoreListFragment();
+        FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
+        transaction.add(R.id.child_menu_frame_layout, subFragment).commit();
 
         btn_toQRPage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -80,24 +87,17 @@ public class MainMenuHomeFragment extends Fragment {
             }
         });
 
-        Fragment subFragment = new StoreListFragment();
-        FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
-        transaction.add(R.id.child_menu_frame_layout, subFragment).commit();
+        btn_convenience_store = inflatedView.findViewById(R.id.btn_convenience_store);
+
+        btn_convenience_store.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // 편의점 카테고리를 갖는 가게들을 보여주는 fragment로 전환
+                ((HomePageActivity)getActivity()).replaceFragment(StoreListFragment.newInstance("",""));
+            }
+        });
 
 
-
-
-// 카테고리 버튼 누르면 가게 리스트로 이동 테스트
-//        btn.setOnClickListener(new View.OnClickListener(){
-//
-//            @Override
-//            public void onClick(View v) {
-//                FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-//                StoreListFragment storeListFragment = new StoreListFragment();
-//                transaction.replace(R.id.menu_frame_layout, storeListFragment);
-//                transaction.commit();
-//            }
-//        });
         return inflatedView;
     }
 
