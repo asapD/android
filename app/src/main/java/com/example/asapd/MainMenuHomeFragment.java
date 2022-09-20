@@ -79,6 +79,14 @@ public class MainMenuHomeFragment extends Fragment {
                 startActivity(intent);
             }
         });
+
+        Fragment subFragment = new StoreListFragment();
+        FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
+        transaction.add(R.id.child_menu_frame_layout, subFragment).commit();
+
+
+
+
 // 카테고리 버튼 누르면 가게 리스트로 이동 테스트
 //        btn.setOnClickListener(new View.OnClickListener(){
 //
