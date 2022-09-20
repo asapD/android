@@ -49,6 +49,12 @@
     <string name="convenience_store">편의점</string>
     <string name="stationary">문구류</string>
     <string name="opening_store">오픈 중인 가게</string>
+    <string name="flying_drone">현재 드론 번호NNNN(이)가 날아가고 있습니다.</string>
+    <string name="calcTime">예상 소요 시간은 20분입니다</string>
+    <string name="noOrderList">현재 주문 내역이 없습니다.</string>
+    <string name="alreadyGet">수령이 완료 되었습니다</string>
+    <string name="yetGet">아직 받지 못 하셨나요?</string>
+    <string name="plzHelp">도움 요청하기</string>
 
     <string name="blahblah">약관 내용 blah blah ~~약관 내용 blah blah ~~약관 내용 blah blah ~~약관 내용 blah blah ~~약관 내용 blah blah ~~약관 내용 blah blah ~~약관 내용 blah blah ~~약관 내용 blah blah ~~약관 내용 blah blah ~~약관 내용 blah blah ~~약관 내용 blah blah ~~약관 내용 blah blah ~~약관 내용 blah blah ~~약관 내용 blah blah ~~약관 내용 blah blah ~~약관 내용 blah blah ~~약관 내용 blah blah ~~약관 내용 blah blah ~~약관 내용 blah blah ~~약관 내용 blah blah ~~약관 내용 blah blah ~~약관 내용 blah blah ~~약관 내용 blah blah ~~약관 내용 blah blah ~~약관 내용 blah blah ~~약관 내용 blah blah ~~약관 내용 blah blah ~~약관 내용 blah blah ~~약관 내용 blah blah ~~약관 내용 blah blah ~~</string>
     <!-- TODO: Remove or change this placeholder text -->

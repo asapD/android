@@ -11,10 +11,17 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AsapD">
         <activity
+            android:name=".LocationActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".QRCodeActivity"
             android:exported="false" />
         <activity android:name=".HomePageActivity" />
-        <activity android:name=".FinishCharge"/>
+        <activity android:name=".FinishCharge" />
         <activity android:name=".SignUp_fin" />
         <activity android:name=".SignUp_input" />
         <activity android:name=".SignUp_accept" />
