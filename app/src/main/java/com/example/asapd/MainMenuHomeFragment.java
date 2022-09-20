@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -45,6 +46,7 @@ public class MainMenuHomeFragment extends Fragment {
 
     private Button btn_fruit, btn_vegetable, btn_fish, btn_meat;
     private Button btn_book, btn_life, btn_convenience_store, btn_stationary;
+    private ImageButton ib_banner1, ib_banner2, ib_banner3, ib_banner4;
 
     public MainMenuHomeFragment() {
         // Required empty public constructor
@@ -102,6 +104,43 @@ public class MainMenuHomeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getContext(), LocationActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        ib_banner1 = inflatedView.findViewById(R.id.ib_banner1);
+        ib_banner2 = inflatedView.findViewById(R.id.ib_banner2);
+        ib_banner3 = inflatedView.findViewById(R.id.ib_banner3);
+        ib_banner4 = inflatedView.findViewById(R.id.ib_banner4);
+
+        ib_banner1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), AdvertisementActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        ib_banner2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), AdvertisementActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        ib_banner3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), AdvertisementActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        ib_banner4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), AdvertisementActivity.class);
                 startActivity(intent);
             }
         });
