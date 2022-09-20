@@ -18,6 +18,16 @@ import android.widget.Button;
  * create an instance of this fragment.
  */
 public class MainMenuHomeFragment extends Fragment {
+    public enum StoreCategory {
+        FRUIT,
+        VEGETABLE,
+        MEAT,
+        FISH,
+        BOOK,
+        DAILY_NECESSITY,
+        CONVENIENCE_STORE,
+        TOY
+    }
 
 //    private Button btn;
 
@@ -87,13 +97,84 @@ public class MainMenuHomeFragment extends Fragment {
             }
         });
 
+        btn_fruit= inflatedView.findViewById(R.id.btn_fruit);
+        btn_vegetable = inflatedView.findViewById(R.id.btn_vegetable);
+        btn_meat = inflatedView.findViewById(R.id.btn_meat);
+        btn_fish = inflatedView.findViewById(R.id.btn_fish);
+        btn_book = inflatedView.findViewById(R.id.btn_book);
+        btn_life = inflatedView.findViewById(R.id.btn_life);
         btn_convenience_store = inflatedView.findViewById(R.id.btn_convenience_store);
+        btn_stationary = inflatedView.findViewById(R.id.btn_stationary);
+
+        btn_fruit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // 편의점 카테고리를 갖는 가게들을 보여주는 fragment로 전환
+                ((HomePageActivity)getActivity())
+                        .replaceFragment(StoreListFragment.newInstance("FRUIT",String.valueOf(StoreCategory.FRUIT)));
+            }
+        });
+
+        btn_vegetable.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // 편의점 카테고리를 갖는 가게들을 보여주는 fragment로 전환
+                ((HomePageActivity)getActivity())
+                        .replaceFragment(StoreListFragment.newInstance("VEGETABLE",String.valueOf(StoreCategory.VEGETABLE)));
+            }
+        });
+
+        btn_meat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // 편의점 카테고리를 갖는 가게들을 보여주는 fragment로 전환
+                ((HomePageActivity)getActivity())
+                        .replaceFragment(StoreListFragment.newInstance("MEAT",String.valueOf(StoreCategory.MEAT)));
+            }
+        });
+
+        btn_fish.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // 편의점 카테고리를 갖는 가게들을 보여주는 fragment로 전환
+                ((HomePageActivity)getActivity())
+                        .replaceFragment(StoreListFragment.newInstance("FISH",String.valueOf(StoreCategory.FISH)));
+            }
+        });
+
+        btn_book.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // 편의점 카테고리를 갖는 가게들을 보여주는 fragment로 전환
+                ((HomePageActivity)getActivity())
+                        .replaceFragment(StoreListFragment.newInstance("BOOK",String.valueOf(StoreCategory.BOOK)));
+            }
+        });
+
+        btn_life.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // 편의점 카테고리를 갖는 가게들을 보여주는 fragment로 전환
+                ((HomePageActivity)getActivity())
+                        .replaceFragment(StoreListFragment.newInstance("DAILY_NECESSITY",String.valueOf(StoreCategory.DAILY_NECESSITY)));
+            }
+        });
 
         btn_convenience_store.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // 편의점 카테고리를 갖는 가게들을 보여주는 fragment로 전환
-                ((HomePageActivity)getActivity()).replaceFragment(StoreListFragment.newInstance("",""));
+                ((HomePageActivity)getActivity())
+                        .replaceFragment(StoreListFragment.newInstance("CONVENIENCE_STORE",String.valueOf(StoreCategory.CONVENIENCE_STORE)));
+            }
+        });
+
+        btn_stationary.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // 편의점 카테고리를 갖는 가게들을 보여주는 fragment로 전환
+                ((HomePageActivity)getActivity())
+                        .replaceFragment(StoreListFragment.newInstance("TOY",String.valueOf(StoreCategory.TOY)));
             }
         });
 
