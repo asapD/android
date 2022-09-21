@@ -1,6 +1,7 @@
 package com.example.asapd;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class StoreListFragment extends Fragment {
     private RecyclerView mRecyclerView;
@@ -69,6 +74,7 @@ public class StoreListFragment extends Fragment {
         mRecyclerAdapter = new RecyclerStoreAdapter(getActivity(), mList);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mRecyclerView.setAdapter(mRecyclerAdapter);
+
         mRecyclerAdapter.setOnItemClickListener(new RecyclerStoreAdapter.OnItemClickListener() {
             @Override
             public void onItemClicked(View v, int pos) {

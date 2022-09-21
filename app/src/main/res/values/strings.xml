@@ -26,10 +26,12 @@
     <string name="signup_re_pw">비밀 번호 재입력</string>
     <string name="signup_birth">생년월일</string>
     <string name="signup_email">이메일</string>
+    <string name="email_check">중복 확인</string>
     <string name="signup_phone">전화 번호</string>
     <string name="signup_phone_format">010-xxxx-xxxx</string>
     <string name="signup_authCode">인증 번호</string>
     <string name="signup_send_phoneNum">인증 번호 전송</string>
+    <string name="check_phoneNum">확인</string>
     <string name="signup_fin">회원 가입 완료</string>
     <string name="signup_fin_ment">회원 가입이 완료 되었습니다</string>
     <string name="signup_to_login">로그인 하러 가기</string>
