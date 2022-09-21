@@ -6,6 +6,7 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -15,9 +16,16 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 
+import com.example.asapd.BaseResponse;
 import com.example.asapd.HomePageActivity;
+import com.example.asapd.MemberSigninRequest;
 import com.example.asapd.R;
+import com.example.asapd.RetrofitClient;
 import com.example.asapd.SignUp_accept;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 public class LoginActivity extends AppCompatActivity {
@@ -60,11 +68,10 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), HomePageActivity.class);
-
-
-                // 서버 통신
-
-
+                String email = et_userid.getText().toString();
+                String pw = et_userpw.getText().toString();
+                MemberSigninRequest memberSigninRequest = new MemberSigninRequest(email,pw);
+                startSignIn(memberSigninRequest);
                 startActivity(intent);
             }
         });
@@ -80,5 +87,23 @@ public class LoginActivity extends AppCompatActivity {
 
 
 
+    }
+
+    public void startSignIn(MemberSigninRequest memberSigninRequest){
+        RetrofitClient.getApiService().userLogin(memberSigninRequest).enqueue(new Callback<BaseResponse>() {
+            @Override
+            public void onResponse(Call<BaseResponse> call, Response<BaseResponse> response) {
+                BaseResponse result = response.body();
+                if (result.getStatus() == 200) {
+                    Log.d("TAG", result.getMessage());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<BaseResponse> call, Throwable t) {
+                Log.e("Sign up Error", t.getMessage());
+                t.printStackTrace();
+            }
+        });
     }
 }

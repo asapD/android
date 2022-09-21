@@ -41,7 +41,9 @@ public class SignUp_input extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // 전화번호 인증 요청 to server
-
+                String contact = et_phone.getText().toString();
+                MemberContactRequest memberContactRequest = new MemberContactRequest(contact);
+                sendCertificate(memberContactRequest);
             }
         });
 
@@ -56,7 +58,7 @@ public class SignUp_input extends AppCompatActivity {
                     String name = et_name.getText().toString();
                     String contact = et_phone.getText().toString();
                     MemberSignUpRequest memberSignUpRequest = new MemberSignUpRequest(name,contact,email,pw);
-                    startSignIn(memberSignUpRequest);
+                    startSignUp(memberSignUpRequest);
                 }
             }
         });
@@ -64,7 +66,7 @@ public class SignUp_input extends AppCompatActivity {
 
     }
 
-    private void startSignIn(MemberSignUpRequest memberSignUpRequest) {
+    private void startSignUp(MemberSignUpRequest memberSignUpRequest) {
         RetrofitClient.getApiService().userSignUp(memberSignUpRequest).enqueue(new Callback<BaseResponse>() {
             @Override
             public void onResponse(Call<BaseResponse> call, Response<BaseResponse> response) {
@@ -82,5 +84,23 @@ public class SignUp_input extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void sendCertificate(MemberContactRequest memberContactRequest){
+        RetrofitClient.getApiService().sendSMS(memberContactRequest).enqueue(new Callback<BaseResponse>() {
+            @Override
+            public void onResponse(Call<BaseResponse> call, Response<BaseResponse> response) {
+                BaseResponse result = response.body();
+                if (result.getStatus() == 200) {
+                    Log.d("TAG", result.getMessage());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<BaseResponse> call, Throwable t) {
+                Log.e("Sign up Error", t.getMessage());
+                t.printStackTrace();
+            }
+        });
     }
 }
