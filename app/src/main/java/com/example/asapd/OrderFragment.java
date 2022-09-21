@@ -2,16 +2,22 @@ package com.example.asapd;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class OrderFragment extends Fragment {
 
@@ -67,7 +73,6 @@ public class OrderFragment extends Fragment {
         ViewGroup rootView = (ViewGroup)inflater.inflate(R.layout.fragment_order_info, container, false);
 
         btn = rootView.findViewById(R.id.btn_charge);
-
         mRecyclerView = (RecyclerView) rootView.findViewById(R.id.recyclerView);
         mList = ItemData.createList(5);
         mRecyclerView.setHasFixedSize(true);
@@ -75,15 +80,6 @@ public class OrderFragment extends Fragment {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mRecyclerView.setAdapter(mRecyclerAdapter);
 
-        btn.setOnClickListener(new View.OnClickListener(){
-
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), FinishCharge.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-                startActivity(intent);
-            }
-        });
         return rootView;
 
     }

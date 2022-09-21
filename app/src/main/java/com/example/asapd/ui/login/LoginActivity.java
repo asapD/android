@@ -18,7 +18,7 @@ import android.widget.TextView;
 
 import com.example.asapd.BaseResponse;
 import com.example.asapd.HomePageActivity;
-import com.example.asapd.MemberSigninRequest;
+import com.example.asapd.MemberRequest.MemberSigninRequest;
 import com.example.asapd.R;
 import com.example.asapd.RetrofitClient;
 import com.example.asapd.SignUp_accept;
@@ -67,12 +67,13 @@ public class LoginActivity extends AppCompatActivity {
         btn_signin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), HomePageActivity.class);
                 String email = et_userid.getText().toString();
                 String pw = et_userpw.getText().toString();
+                if(email == null || pw == null) {
+
+                }
                 MemberSigninRequest memberSigninRequest = new MemberSigninRequest(email,pw);
                 startSignIn(memberSigninRequest);
-                startActivity(intent);
             }
         });
 
@@ -95,6 +96,11 @@ public class LoginActivity extends AppCompatActivity {
             public void onResponse(Call<BaseResponse> call, Response<BaseResponse> response) {
                 BaseResponse result = response.body();
                 if (result.getStatus() == 200) {
+                    Log.d("TAG", result.getMessage());
+                    Intent intent = new Intent(getApplicationContext(), HomePageActivity.class);
+                    startActivity(intent);
+                }
+                else if (result.getStatus() == 400) {
                     Log.d("TAG", result.getMessage());
                 }
             }
