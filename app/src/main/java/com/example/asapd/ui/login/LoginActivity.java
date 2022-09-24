@@ -1,6 +1,8 @@
 package com.example.asapd.ui.login;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 
@@ -32,11 +34,19 @@ public class LoginActivity extends AppCompatActivity {
 
     private EditText et_userid, et_userpw;
     private Button btn_signin, btn_signup;
+    private static String ACCESSTOKEN;
+    SharedPreferences mPreferences;
+    SharedPreferences.Editor editor;
+
+    private String SharedPrefFile = "com.example.android.SharedPreferences";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        mPreferences = getSharedPreferences("pref", Activity.MODE_PRIVATE);
+        editor = mPreferences.edit();
 
         et_userid = findViewById(R.id.et_userid);
         et_userpw = findViewById(R.id.et_userpw);
@@ -95,8 +105,13 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<BaseResponse> call, Response<BaseResponse> response) {
                 BaseResponse result = response.body();
+
                 if (result.getStatus() == 200) {
                     Log.d("TAG", result.getMessage());
+                    ACCESSTOKEN = result.getData().get("accessToken");
+                    Log.d("TAG", "Token is : " + ACCESSTOKEN);
+                    editor.putString("TOKEN", ACCESSTOKEN);
+
                     Intent intent = new Intent(getApplicationContext(), HomePageActivity.class);
                     startActivity(intent);
                 }
