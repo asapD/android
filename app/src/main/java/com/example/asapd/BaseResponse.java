@@ -1,5 +1,7 @@
 package com.example.asapd;
 
+import java.util.HashMap;
+
 public class BaseResponse {
 
 
@@ -7,7 +9,7 @@ public class BaseResponse {
 
     private String message;
 
-    private Object data;
+    private HashMap<String, String> data;
 
     public Integer getStatus() {
         return status;
@@ -17,13 +19,15 @@ public class BaseResponse {
         return message;
     }
 
-    public Object getData() {
+    public HashMap<String, String> getData() {
         return data;
     }
 
-    public BaseResponse(Integer status, String message, Object data) {
+    public BaseResponse(Integer status, String message, HashMap<String, String> data) {
         this.status = status;
         this.message = message;
         this.data = data;
+
     }
+
 }
