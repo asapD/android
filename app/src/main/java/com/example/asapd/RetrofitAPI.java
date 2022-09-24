@@ -8,6 +8,9 @@ import com.example.asapd.MemberRequest.MemberSigninRequest;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.GET;
+import retrofit2.http.Header;
+import retrofit2.http.Headers;
 import retrofit2.http.POST;
 
 public interface RetrofitAPI {
@@ -25,4 +28,8 @@ public interface RetrofitAPI {
 
     @POST("api/auth/verify-contact-code")
     Call<BaseResponse> verifyContactCode (@Body MemberContactCodeRequest memberContactCodeRequest);
+
+    @POST("api/orders")
+    Call<BaseResponse> orderItems (@Header("Authorization") String authCode, @Body OrderRequest orderRequest);
+
 }

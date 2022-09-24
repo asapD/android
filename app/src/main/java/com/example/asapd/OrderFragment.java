@@ -25,10 +25,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 import okhttp3.Headers;
-import okhttp3.internal.http2.Header;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import retrofit2.http.Header;
 
 public class OrderFragment extends Fragment {
 
@@ -96,11 +96,14 @@ public class OrderFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 String destination = editTextTextPersonName.getText().toString();
-                Map<String, Integer> items = new HashMap<>();
+                HashMap<String, Integer> items = new HashMap<>();
                 // items 정보 들고 오기
+                items.put("item1", 1);
+                items.put("item2", 3);
+                items.put("item3", 5);
 
                 OrderRequest orderRequest = new OrderRequest(destination, items);
-                sendCode(orderRequest);
+                sendOrderInfo(orderRequest);
             }
         });
         mRecyclerView = (RecyclerView) rootView.findViewById(R.id.recyclerView);
@@ -114,20 +117,15 @@ public class OrderFragment extends Fragment {
 
     }
 
-    private void sendCode(ItemsOrderRequest itemsOrderRequest){
-        RetrofitClient.getApiService().itemsOrder(itemsOrderRequest).enqueue(new Callback<BaseResponse>() {
+    private void sendOrderInfo(OrderRequest orderRequest){
+        RetrofitClient.getApiService().orderItems("Authorization" + preferences.getString("TOKEN", "NULL"), orderRequest).enqueue(new Callback<BaseResponse>() {
             @Override
             public void onResponse(Call<BaseResponse> call, Response<BaseResponse> response) {
-                Headers headers = response.headers();
                 BaseResponse result = response.body();
-                if (result.getStatus() == 200) {
-                    Log.d("TAG", result.getMessage());
-
-                }
-                else if (result.getStatus() == 500) {
+                if(result.getStatus() == 200){
                     Log.d("TAG", result.getMessage());
                 }
-                else{
+                else if(result.getStatus() == 401){
                     Log.d("TAG", result.getMessage());
                 }
             }
