@@ -25,7 +25,7 @@ public class MainMenuBasketFragment extends Fragment {
     private RecyclerView mRecyclerView;
     private RecyclerItemAdapter mRecyclerAdapter;
     private ArrayList<ItemData> mList;
-    private Button btn;
+    private Button btn_order;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -73,7 +73,7 @@ public class MainMenuBasketFragment extends Fragment {
         // Inflate the layout for this fragment
         ViewGroup rootView = (ViewGroup)inflater.inflate(R.layout.fragment_main_menu_basket, container, false);
 
-        btn = rootView.findViewById(R.id.btn_charge);
+        btn_order = rootView.findViewById(R.id.btn_order);
 
         mRecyclerView = (RecyclerView) rootView.findViewById(R.id.recyclerView);
         mList = ItemData.createList(5);
@@ -82,8 +82,7 @@ public class MainMenuBasketFragment extends Fragment {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mRecyclerView.setAdapter(mRecyclerAdapter);
 
-        btn.setOnClickListener(new View.OnClickListener(){
-
+        btn_order.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
                 FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
