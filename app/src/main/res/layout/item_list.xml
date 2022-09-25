@@ -7,11 +7,11 @@ android:gravity="center_vertical"
 android:layout_marginBottom="8dp"
 android:background="@drawable/item_border">
 
-    <ImageView
-        android:id="@+id/profile"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:src="@mipmap/ic_launcher" />
+<!--    <ImageView-->
+<!--        android:id="@+id/profile"-->
+<!--        android:layout_width="50dp"-->
+<!--        android:layout_height="50dp"-->
+<!--        android:src="@mipmap/ic_launcher" />-->
 
     <LinearLayout
         android:layout_width="0dp"
@@ -32,7 +32,17 @@ android:background="@drawable/item_border">
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/content"
+            android:id="@+id/owner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:includeFontPadding="false"
+            android:text="TITLE"
+            android:textColor="@android:color/black"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/address"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:includeFontPadding="false"

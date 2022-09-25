@@ -1,5 +1,7 @@
 package com.example.asapd;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -11,16 +13,22 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.gson.internal.LinkedTreeMap;
+
+import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class StoreListFragment extends Fragment {
+public class StoreListFragment extends Fragment { // 등록된 가게 GET 받아오기
     private RecyclerView mRecyclerView;
     private RecyclerStoreAdapter mRecyclerAdapter;
     private ArrayList<StoreData> mList;
+
+    private SharedPreferences preferences;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -60,6 +68,7 @@ public class StoreListFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+        mList = new ArrayList<>();
     }
 
     @Override
@@ -68,27 +77,64 @@ public class StoreListFragment extends Fragment {
         // Inflate the layout for this fragment
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_store_list, container, false);
         mRecyclerView = (RecyclerView) rootView.findViewById(R.id.recyclerView);
+        preferences = this.getActivity().getSharedPreferences("pref", Context.MODE_PRIVATE);
 
-        mList = StoreData.createList(5);
+        /* GET 으로 받아와서 처리*/
+
+//        mList = new ArrayList<>();
+        sendGetStore();
+        Log.d("TAG", "Sizeof mList (Outside): " + mList.size()); // 왜 0이지??
         mRecyclerView.setHasFixedSize(true);
-        mRecyclerAdapter = new RecyclerStoreAdapter(getActivity(), mList);
+        mRecyclerAdapter = new RecyclerStoreAdapter(getActivity(), this.mList);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mRecyclerView.setAdapter(mRecyclerAdapter);
 
         mRecyclerAdapter.setOnItemClickListener(new RecyclerStoreAdapter.OnItemClickListener() {
             @Override
-            public void onItemClicked(View v, int pos) {
-                Bundle bundle = new Bundle();
-                bundle.putInt("resId", mList.get(pos).getResId());
-                bundle.putString("name", mList.get(pos).getTitle());
+            public void onItemClicked(View v, int pos) { //
                 FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
                 StoreItemFragment storeItemFragment = new StoreItemFragment();
                 transaction.replace(R.id.menu_frame_layout, storeItemFragment);
                 transaction.commit();
             }
         });
-
         return rootView;
-
     }
+
+    private void sendGetStore(){
+        RetrofitClient.getApiService().getStores(preferences.getString("TOKEN", "NULL")).enqueue(new Callback<StoreResponse>() {
+            @Override
+            public void onResponse(Call<StoreResponse> call, Response<StoreResponse> response) {
+                StoreResponse result = response.body();
+                if(result.getStatus() == 200){
+                    Log.d("TAG", result.getMessage());
+                    ArrayList<LinkedTreeMap<String, Object>> orderList = (ArrayList<LinkedTreeMap<String, Object>>) result.getData().get("content");
+
+                    double storeId, owner;
+                    String name, address;
+                    for (LinkedTreeMap<String, Object> o : orderList) {
+                        storeId = (double) o.get("storeId");
+                        name = o.get("name").toString();
+                        owner = (double) o.get("owner");
+                        address = o.get("address").toString();
+
+                        mList.add(new StoreData(storeId, name, owner, address));
+                    }
+
+                    Log.d("TAG", mList.get(0).storeId+"");
+                    Log.d("TAG", mList.get(0).name);
+                    Log.d("TAG", mList.get(0).owner+"");
+                    Log.d("TAG", mList.get(0).address);
+                    Log.d("TAG", "Sizeof mList(Inside) : " + mList.size());
+                }
+                else { Log.d("TAG", result.getMessage()); }
+
+            }
+
+            @Override
+            public void onFailure(Call<StoreResponse> call, Throwable t) { }
+        });
+    }
+
+
 }

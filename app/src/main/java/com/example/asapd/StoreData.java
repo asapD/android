@@ -5,50 +5,33 @@ import java.util.Arrays;
 import java.util.List;
 
 public class StoreData {
-    int resId; //이미지 데이터
+    double storeId;
     String name;
-    String content;
+    double owner;
+    String address;
 
-    public StoreData(int resId, String title, String content) {
-        this.resId = resId;
-        this.name= title;
-        this.content = content;
+    public StoreData(double storedId, String name, double owner, String address) {
+        this.storeId = storedId;
+        this.name= name;
+        this.owner = owner;
+        this.address = address;
     }
 
-    public String getTitle() {
+    public double getStoreId() { return storeId; }
+
+    public double getOwner() { return owner; }
+
+    public String getName() {
         return name;
     }
 
-    public void setTitle(String name) {
-        this.name = name;
+    public void setName(String name) { this.name = name; }
+
+    public String getAddress() { return address; }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 
-    public String getContent() {
-        return content;
-    }
 
-    public void setContent(String content) {
-        this.content = content;
-    }
-
-    public int getResId() {
-        return resId;
-    }
-
-    public void setResId(int resId) {
-        this.resId = resId;
-    }
-
-    List<Integer> listResId = Arrays.asList(
-            R.drawable.store
-    );
-
-    public static ArrayList<StoreData> createList(int num){
-        ArrayList<StoreData> list = new ArrayList<StoreData>();
-
-        for(int i = 1; i <= num; i++){
-            list.add(new StoreData( R.drawable.store,"item", "content"));
-        }
-        return list;
-    }
 }

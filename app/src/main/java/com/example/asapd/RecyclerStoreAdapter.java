@@ -18,7 +18,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class RecyclerStoreAdapter extends RecyclerView.Adapter<RecyclerStoreAdapter.ViewHolder>{
-    private ArrayList<StoreData> mList =  new ArrayList<>();
+    private ArrayList<StoreData> mList;
     private Context context;
 
     public RecyclerStoreAdapter(Context context, ArrayList<StoreData> mList) {
@@ -59,15 +59,15 @@ public class RecyclerStoreAdapter extends RecyclerView.Adapter<RecyclerStoreAdap
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        ImageView profile;
-        TextView title;
-        TextView content;
+        TextView name;
+        TextView owner;
+        TextView address;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            profile = (ImageView) itemView.findViewById(R.id.profile);
-            title = (TextView) itemView.findViewById(R.id.name);
-            content = (TextView) itemView.findViewById(R.id.content);
+            name = (TextView) itemView.findViewById(R.id.name);
+            owner = (TextView) itemView.findViewById(R.id.owner);
+            address = (TextView) itemView.findViewById(R.id.content);
 
             itemView.setOnClickListener(new View.OnClickListener(){
                 @Override
@@ -83,9 +83,8 @@ public class RecyclerStoreAdapter extends RecyclerView.Adapter<RecyclerStoreAdap
         }
 
         void onBind(StoreData item){
-            profile.setImageResource(item.getResId());
-            title.setText(item.getTitle());
-            content.setText(item.getContent());
+            name.setText(item.getName());
+            address.setText(item.getAddress());
         }
     }
 

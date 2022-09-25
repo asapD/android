@@ -6,12 +6,16 @@ import com.example.asapd.MemberRequest.MemberEmailRequest;
 import com.example.asapd.MemberRequest.MemberSignUpRequest;
 import com.example.asapd.MemberRequest.MemberSigninRequest;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
+import retrofit2.http.Query;
 
 public interface RetrofitAPI {
     @POST("api/auth/sign-up")
@@ -31,5 +35,13 @@ public interface RetrofitAPI {
 
     @POST("api/orders")
     Call<OrderResponse> orderItems (@Header("Authorization") String authCode, @Body OrderRequest orderRequest);
+
+    @GET("api/item")
+    Call<ItemResponse> getItems (@Header("Authorization") String authCode);
+
+    @GET("api/store")
+    Call<StoreResponse> getStores (@Header("Authorization") String authCode);
+
+
 
 }

@@ -34,5 +34,7 @@ public class SignUp_accept extends AppCompatActivity {
             }
         });
 
+        /* "CHECK" chk_check_all 체크박스 클릭 시 위에 세 체크박스 모두 체크되는 로직 구현*/
+
     }
 }
