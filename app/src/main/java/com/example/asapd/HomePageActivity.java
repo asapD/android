@@ -1,11 +1,14 @@
 package com.example.asapd;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.DialogInterface;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.MenuItem;
 
@@ -66,4 +69,30 @@ public class HomePageActivity extends AppCompatActivity {
         fragmentTransaction.replace(R.id.menu_frame_layout, fragment).commit();
     }
 
+    @Override
+    public void onBackPressed() {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(HomePageActivity.this);
+        builder.setMessage("종료하시겠습니까?");
+        builder.setCancelable(true);
+        builder.setNegativeButton("아니오", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+
+        builder.setPositiveButton("예", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                moveTaskToBack(true);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    finishAndRemoveTask();
+                }else finish();
+
+                System.exit(0);
+            }
+
+        });
+        builder.show();
+    }
 }

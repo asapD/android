@@ -23,7 +23,7 @@ public class SignUp_fin extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP); // 로그인 페이지로 돌아가면서, 이전 액티비티 스택들 비움
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP); // 메인 페이지로 돌아가면서, 이전 액티비티 스택들 비움
                 startActivity(intent);
             }
         });
