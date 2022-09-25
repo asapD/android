@@ -34,11 +34,9 @@ public class LoginActivity extends AppCompatActivity {
 
     private EditText et_userid, et_userpw;
     private Button btn_signin, btn_signup;
-    private static String ACCESSTOKEN;
+    private String ACCESSTOKEN;
     SharedPreferences mPreferences;
     SharedPreferences.Editor editor;
-
-    private String SharedPrefFile = "com.example.android.SharedPreferences";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -51,27 +49,6 @@ public class LoginActivity extends AppCompatActivity {
         et_userid = findViewById(R.id.et_userid);
         et_userpw = findViewById(R.id.et_userpw);
 
-        et_userid.setOnEditorActionListener(new TextView.OnEditorActionListener() { // 엔터 입력 시 처리
-            @Override
-            public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
-                if(i==EditorInfo.IME_ACTION_DONE || i==EditorInfo.IME_NULL)
-                    return true;
-                return false;
-            }
-        });
-
-        et_userpw.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
-                if(i==EditorInfo.IME_ACTION_DONE || i==EditorInfo.IME_NULL){
-
-                    // 로그인 시도()
-
-                    return true;
-                }
-                return false;
-            }
-        });
 
         btn_signin = findViewById(R.id.btn_signin);
         btn_signin.setOnClickListener(new View.OnClickListener() {
@@ -79,8 +56,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View view) {
                 String email = et_userid.getText().toString();
                 String pw = et_userpw.getText().toString();
-                if(email == null || pw == null) {
-
+                if(email == null || pw == null) { // "CHECK" email || pw 가 null인 경우 AlertDialog 띄우기
                 }
                 MemberSigninRequest memberSigninRequest = new MemberSigninRequest(email,pw);
                 startSignIn(memberSigninRequest);
@@ -95,9 +71,6 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
-
-
     }
 
     public void startSignIn(MemberSigninRequest memberSigninRequest){
@@ -110,7 +83,13 @@ public class LoginActivity extends AppCompatActivity {
                     Log.d("TAG", result.getMessage());
                     ACCESSTOKEN = result.getData().get("accessToken");
                     Log.d("TAG", "Token is : " + ACCESSTOKEN);
+
+                    /* 토큰 SharedPreferences 로 관리 */
+                    // getSharedPreferences()으로 접근 할 때, "TOKEN" 으로 불러 와야 함.
+                    mPreferences = getSharedPreferences("pref", MODE_PRIVATE);
+                    editor = mPreferences.edit();
                     editor.putString("TOKEN", ACCESSTOKEN);
+                    editor.commit();
 
                     Intent intent = new Intent(getApplicationContext(), HomePageActivity.class);
                     startActivity(intent);

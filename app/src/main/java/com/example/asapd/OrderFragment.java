@@ -36,7 +36,7 @@ public class OrderFragment extends Fragment {
     private RecyclerItemAdapter mRecyclerAdapter;
     private ArrayList<ItemData> mList;
     private Button btn_charge;
-    private EditText editTextTextPersonName;
+    private EditText et_detail_address;
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -86,44 +86,49 @@ public class OrderFragment extends Fragment {
         // Inflate the layout for this fragment
         ViewGroup rootView = (ViewGroup)inflater.inflate(R.layout.fragment_order_info, container, false);
 
-        btn_charge = rootView.findViewById(R.id.btn_charge); // 주문하기
-        editTextTextPersonName = rootView.findViewById(R.id.editTextTextPersonName); // 상세 주소 입력
+        btn_charge = rootView.findViewById(R.id.btn_charge); // 결제하기 버튼
+        et_detail_address = rootView.findViewById(R.id.et_detail_address); // 상세 주소 입력
 
         preferences = this.getActivity().getSharedPreferences("pref", Context.MODE_PRIVATE);
         Log.d("TAG", preferences.getString("TOKEN", "NULL"));
 
-        btn_charge.setOnClickListener(new View.OnClickListener() {
+        btn_charge.setOnClickListener(new View.OnClickListener() { // 결제하기 버튼 클릭 시 서버에 POST 전송
             @Override
             public void onClick(View v) {
-                String destination = editTextTextPersonName.getText().toString();
+                String destination = et_detail_address.getText().toString();
                 HashMap<String, Integer> items = new HashMap<>();
                 // items 정보 들고 오기
-                items.put("item1", 1);
-                items.put("item2", 3);
-                items.put("item3", 5);
+                items.put("1", 1);
+                items.put("2", 3);
+                items.put("3", 5); // item 정보 임시 삽입
+                // -> "CHECK" 장바구니에 담는건 안드로이드 단에서만 처리(따로 POST 안 함)
+                // -> SharedPreference 로 갖고 있다가 결제 완료되면 editor.delete 하면 될 듯
 
                 OrderRequest orderRequest = new OrderRequest(destination, items);
                 sendOrderInfo(orderRequest);
             }
         });
         mRecyclerView = (RecyclerView) rootView.findViewById(R.id.recyclerView);
-        mList = ItemData.createList(5);
         mRecyclerView.setHasFixedSize(true);
+
+        mList = ItemData.createList(5); // <- "CHECK" 실제 GET 요청으로 아이템 리스트 받아오는 코드 필요
+
         mRecyclerAdapter = new RecyclerItemAdapter(getActivity(),mList);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mRecyclerView.setAdapter(mRecyclerAdapter);
 
         return rootView;
-
     }
 
     private void sendOrderInfo(OrderRequest orderRequest){
-        RetrofitClient.getApiService().orderItems("Authorization" + preferences.getString("TOKEN", "NULL"), orderRequest).enqueue(new Callback<BaseResponse>() {
+        RetrofitClient.getApiService().orderItems(preferences.getString("TOKEN", "NULL"), orderRequest).enqueue(new Callback<OrderResponse>() {
             @Override
-            public void onResponse(Call<BaseResponse> call, Response<BaseResponse> response) {
-                BaseResponse result = response.body();
+            public void onResponse(Call<OrderResponse> call, Response<OrderResponse> response) {
+                OrderResponse result = response.body();
                 if(result.getStatus() == 200){
                     Log.d("TAG", result.getMessage());
+                    Log.d("TAG", "orderId : " + result.getData().get("orderId"));
+                    Log.d("TAG", "serialNum : " + result.getData().get("serialNum"));
                 }
                 else if(result.getStatus() == 401){
                     Log.d("TAG", result.getMessage());
@@ -131,7 +136,7 @@ public class OrderFragment extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<BaseResponse> call, Throwable t) {
+            public void onFailure(Call<OrderResponse> call, Throwable t) {
                 Log.e("Send code Error", t.getMessage());
                 t.printStackTrace();
             }

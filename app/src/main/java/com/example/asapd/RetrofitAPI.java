@@ -30,6 +30,6 @@ public interface RetrofitAPI {
     Call<BaseResponse> verifyContactCode (@Body MemberContactCodeRequest memberContactCodeRequest);
 
     @POST("api/orders")
-    Call<BaseResponse> orderItems (@Header("Authorization") String authCode, @Body OrderRequest orderRequest);
+    Call<OrderResponse> orderItems (@Header("Authorization") String authCode, @Body OrderRequest orderRequest);
 
 }
