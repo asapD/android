@@ -113,36 +113,24 @@ public class MainMenuHomeFragment extends Fragment {
         ib_banner3 = inflatedView.findViewById(R.id.ib_banner3);
         ib_banner4 = inflatedView.findViewById(R.id.ib_banner4);
 
-        ib_banner1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getContext(), AdvertisementActivity.class);
-                startActivity(intent);
-            }
+        ib_banner1.setOnClickListener(v -> {
+            Intent intent = new Intent(getContext(), AdvertisementActivity.class);
+            startActivity(intent);
         });
 
-        ib_banner2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getContext(), AdvertisementActivity.class);
-                startActivity(intent);
-            }
+        ib_banner2.setOnClickListener(v -> {
+            Intent intent = new Intent(getContext(), AdvertisementActivity.class);
+            startActivity(intent);
         });
 
-        ib_banner3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getContext(), AdvertisementActivity.class);
-                startActivity(intent);
-            }
+        ib_banner3.setOnClickListener(v -> {
+            Intent intent = new Intent(getContext(), AdvertisementActivity.class);
+            startActivity(intent);
         });
 
-        ib_banner4.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getContext(), AdvertisementActivity.class);
-                startActivity(intent);
-            }
+        ib_banner4.setOnClickListener(v -> {
+            Intent intent = new Intent(getContext(), AdvertisementActivity.class);
+            startActivity(intent);
         });
 
         btn_fruit= inflatedView.findViewById(R.id.btn_fruit);
@@ -154,76 +142,52 @@ public class MainMenuHomeFragment extends Fragment {
         btn_convenience_store = inflatedView.findViewById(R.id.btn_convenience_store);
         btn_stationary = inflatedView.findViewById(R.id.btn_stationary);
 
-        btn_fruit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // 편의점 카테고리를 갖는 가게들을 보여주는 fragment로 전환
-                ((HomePageActivity)getActivity())
-                        .replaceFragment(StoreListFragment.newInstance("FRUIT",String.valueOf(StoreCategory.FRUIT)));
-            }
+        btn_fruit.setOnClickListener(v -> {
+            // 과일 카테고리를 갖는 가게들을 보여주는 fragment 로 전환
+            ((HomePageActivity)getActivity())
+                    .replaceFragment(StoreListFragment.newInstance("FRUIT",String.valueOf(StoreCategory.FRUIT)));
         });
 
-        btn_vegetable.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // 편의점 카테고리를 갖는 가게들을 보여주는 fragment로 전환
-                ((HomePageActivity)getActivity())
-                        .replaceFragment(StoreListFragment.newInstance("VEGETABLE",String.valueOf(StoreCategory.VEGETABLE)));
-            }
+        btn_vegetable.setOnClickListener(v -> {
+            // 야채 카테고리를 갖는 가게들을 보여주는 fragment 로 전환
+            ((HomePageActivity)getActivity())
+                    .replaceFragment(StoreListFragment.newInstance("VEGETABLE",String.valueOf(StoreCategory.VEGETABLE)));
         });
 
-        btn_meat.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // 편의점 카테고리를 갖는 가게들을 보여주는 fragment로 전환
-                ((HomePageActivity)getActivity())
-                        .replaceFragment(StoreListFragment.newInstance("MEAT",String.valueOf(StoreCategory.MEAT)));
-            }
+        btn_meat.setOnClickListener(v -> {
+            // 고기 카테고리를 갖는 가게들을 보여주는 fragment 로 전환
+            ((HomePageActivity)getActivity())
+                    .replaceFragment(StoreListFragment.newInstance("MEAT",String.valueOf(StoreCategory.MEAT)));
         });
 
-        btn_fish.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // 편의점 카테고리를 갖는 가게들을 보여주는 fragment로 전환
-                ((HomePageActivity)getActivity())
-                        .replaceFragment(StoreListFragment.newInstance("FISH",String.valueOf(StoreCategory.FISH)));
-            }
+        btn_fish.setOnClickListener(v -> {
+            // 생선 카테고리를 갖는 가게들을 보여주는 fragment 로 전환
+            ((HomePageActivity)getActivity())
+                    .replaceFragment(StoreListFragment.newInstance("FISH",String.valueOf(StoreCategory.FISH)));
         });
 
-        btn_book.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // 편의점 카테고리를 갖는 가게들을 보여주는 fragment로 전환
-                ((HomePageActivity)getActivity())
-                        .replaceFragment(StoreListFragment.newInstance("BOOK",String.valueOf(StoreCategory.BOOK)));
-            }
+        btn_book.setOnClickListener(v -> {
+            // 도서 카테고리를 갖는 가게들을 보여주는 fragment 로 전환
+            ((HomePageActivity)getActivity())
+                    .replaceFragment(StoreListFragment.newInstance("BOOK",String.valueOf(StoreCategory.BOOK)));
         });
 
-        btn_life.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // 편의점 카테고리를 갖는 가게들을 보여주는 fragment로 전환
-                ((HomePageActivity)getActivity())
-                        .replaceFragment(StoreListFragment.newInstance("DAILY_NECESSITY",String.valueOf(StoreCategory.DAILY_NECESSITY)));
-            }
+        btn_life.setOnClickListener(v -> {
+            // 생필품 카테고리를 갖는 가게들을 보여주는 fragment 로 전환
+            ((HomePageActivity)getActivity())
+                    .replaceFragment(StoreListFragment.newInstance("DAILY_NECESSITY",String.valueOf(StoreCategory.DAILY_NECESSITY)));
         });
 
-        btn_convenience_store.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // 편의점 카테고리를 갖는 가게들을 보여주는 fragment로 전환
-                ((HomePageActivity)getActivity())
-                        .replaceFragment(StoreListFragment.newInstance("CONVENIENCE_STORE",String.valueOf(StoreCategory.CONVENIENCE_STORE)));
-            }
+        btn_convenience_store.setOnClickListener(v -> {
+            // 편의점 카테고리를 갖는 가게들을 보여주는 fragment 로 전환
+            ((HomePageActivity)getActivity())
+                    .replaceFragment(StoreListFragment.newInstance("CONVENIENCE_STORE",String.valueOf(StoreCategory.CONVENIENCE_STORE)));
         });
 
-        btn_stationary.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // 편의점 카테고리를 갖는 가게들을 보여주는 fragment로 전환
-                ((HomePageActivity)getActivity())
-                        .replaceFragment(StoreListFragment.newInstance("TOY",String.valueOf(StoreCategory.TOY)));
-            }
+        btn_stationary.setOnClickListener(v -> {
+            // 문구점 카테고리를 갖는 가게들을 보여주는 fragment 로 전환
+            ((HomePageActivity)getActivity())
+                    .replaceFragment(StoreListFragment.newInstance("TOY",String.valueOf(StoreCategory.TOY)));
         });
 
 

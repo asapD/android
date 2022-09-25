@@ -106,6 +106,10 @@ public class OrderFragment extends Fragment {
 
                 OrderRequest orderRequest = new OrderRequest(destination, items);
                 sendOrderInfo(orderRequest);
+
+                Intent intent = new Intent(getActivity(), FinishChargeActivity.class);
+                startActivity(intent);
+
             }
         });
         mRecyclerView = (RecyclerView) rootView.findViewById(R.id.recyclerView);
@@ -116,6 +120,7 @@ public class OrderFragment extends Fragment {
         mRecyclerAdapter = new RecyclerItemAdapter(getActivity(),mList);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mRecyclerView.setAdapter(mRecyclerAdapter);
+
 
         return rootView;
     }

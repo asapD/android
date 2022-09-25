@@ -99,8 +99,7 @@
                 android:layout_width="137dp"
                 android:layout_height="47dp"
                 android:layout_marginEnd="10dp"
-                android:text="결제하기"
-                tools:ignore="TouchTargetSizeCheck" />
+                android:text="결제하기" />
         </LinearLayout>
 
     </LinearLayout>
