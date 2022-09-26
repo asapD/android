@@ -57,15 +57,13 @@ public class RecyclerItemAdapter extends RecyclerView.Adapter<RecyclerItemAdapte
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
-        ImageView profile;
         TextView title;
         TextView content;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            profile = (ImageView) itemView.findViewById(R.id.profile);
             title = (TextView) itemView.findViewById(R.id.name);
-            content = (TextView) itemView.findViewById(R.id.content);
+            content = (TextView) itemView.findViewById(R.id.address);
 
             itemView.setOnClickListener(new View.OnClickListener(){
                 @Override
@@ -81,7 +79,6 @@ public class RecyclerItemAdapter extends RecyclerView.Adapter<RecyclerItemAdapte
         }
 
         void onBind(ItemData item){
-            profile.setImageResource(item.getResId());
             title.setText(item.getTitle());
             content.setText(item.getContent());
         }

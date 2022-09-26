@@ -83,21 +83,6 @@ public class StoreListFragment extends Fragment { // 등록된 가게 GET 받아
 
 //        mList = new ArrayList<>();
         sendGetStore();
-        Log.d("TAG", "Sizeof mList (Outside): " + mList.size()); // 왜 0이지??
-        mRecyclerView.setHasFixedSize(true);
-        mRecyclerAdapter = new RecyclerStoreAdapter(getActivity(), this.mList);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        mRecyclerView.setAdapter(mRecyclerAdapter);
-
-        mRecyclerAdapter.setOnItemClickListener(new RecyclerStoreAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClicked(View v, int pos) { //
-                FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-                StoreItemFragment storeItemFragment = new StoreItemFragment();
-                transaction.replace(R.id.menu_frame_layout, storeItemFragment);
-                transaction.commit();
-            }
-        });
         return rootView;
     }
 
@@ -120,6 +105,20 @@ public class StoreListFragment extends Fragment { // 등록된 가게 GET 받아
 
                         mList.add(new StoreData(storeId, name, owner, address));
                     }
+                    mRecyclerView.setHasFixedSize(true);
+                    mRecyclerAdapter = new RecyclerStoreAdapter(getActivity(), mList);
+                    mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+                    mRecyclerView.setAdapter(mRecyclerAdapter);
+
+                    mRecyclerAdapter.setOnItemClickListener(new RecyclerStoreAdapter.OnItemClickListener() {
+                        @Override
+                        public void onItemClicked(View v, int pos) { //
+                            FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+                            StoreItemFragment storeItemFragment = new StoreItemFragment();
+                            transaction.replace(R.id.menu_frame_layout, storeItemFragment);
+                            transaction.commit();
+                        }
+                    });
 
                     Log.d("TAG", mList.get(0).storeId+"");
                     Log.d("TAG", mList.get(0).name);

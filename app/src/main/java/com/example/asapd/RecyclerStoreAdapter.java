@@ -60,14 +60,12 @@ public class RecyclerStoreAdapter extends RecyclerView.Adapter<RecyclerStoreAdap
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView name;
-        TextView owner;
         TextView address;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             name = (TextView) itemView.findViewById(R.id.name);
-            owner = (TextView) itemView.findViewById(R.id.owner);
-            address = (TextView) itemView.findViewById(R.id.content);
+            address = (TextView) itemView.findViewById(R.id.address);
 
             itemView.setOnClickListener(new View.OnClickListener(){
                 @Override
