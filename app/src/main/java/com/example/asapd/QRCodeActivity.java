@@ -2,7 +2,9 @@ package com.example.asapd;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ImageView;
 
 import android.graphics.Bitmap;
@@ -15,14 +17,19 @@ public class QRCodeActivity extends AppCompatActivity {
 
     private ImageView img_QRCode;
     private String serialNum;
+    SharedPreferences pref_serialNum;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_qrcode);
 
+        pref_serialNum = getSharedPreferences("serialNum", MODE_PRIVATE);
+        serialNum = pref_serialNum.getString("serialNum", "NULL");
+        Log.d("TAG", "in QRActivity, serialNum : " + serialNum);
+
         img_QRCode = findViewById(R.id.img_QRCode);
-        serialNum = "This is Serial Number for 40 character"; // 아두이노에서 받을 시리얼 넘버
+//        serialNum = "This is Serial Number for 40 character"; // 아두이노에서 받을 시리얼 넘버
 
         MultiFormatWriter multiFormatWriter = new MultiFormatWriter();
 

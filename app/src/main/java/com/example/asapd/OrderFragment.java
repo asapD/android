@@ -52,7 +52,7 @@ public class OrderFragment extends Fragment {
     private String mParam2;
     private ArrayList<ItemData> mlist;
 
-    private SharedPreferences preferences;
+    private SharedPreferences preferences, pref_serialNum;
 
     public OrderFragment(){
         // Required empty public constructor
@@ -138,6 +138,10 @@ public class OrderFragment extends Fragment {
                     Log.d("TAG", result.getMessage());
                     Log.d("TAG", "orderId : " + result.getData().get("orderId"));
                     Log.d("TAG", "serialNum : " + result.getData().get("serialNum"));
+                    pref_serialNum = getActivity().getSharedPreferences("serialNum", Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = pref_serialNum.edit();
+                    editor.putString("serialNum", result.getData().get("serialNum"));
+                    editor.commit();
                 }
                 else if(result.getStatus() == 401){
                     Log.d("TAG", result.getMessage());
