@@ -120,6 +120,7 @@ public class OrderFragment extends Fragment {
                 sendOrderInfo(orderRequest);
 
                 removePref_item(getContext(), "BASKET");
+
                 Intent intent = new Intent(getActivity(), FinishChargeActivity.class);
                 startActivity(intent);
             }
@@ -176,7 +177,8 @@ public class OrderFragment extends Fragment {
     }
 
     public void removePref_item(Context context, String key){
-        SharedPreferences prefs = context.getSharedPreferences(key, Context.MODE_PRIVATE);
+        Log.d("TAG", "REMOVE 함수 실행");
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
         SharedPreferences.Editor editor = prefs.edit();
         editor.remove(key);
         editor.commit();
