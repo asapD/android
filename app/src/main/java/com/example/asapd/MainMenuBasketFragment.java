@@ -1,5 +1,7 @@
 package com.example.asapd;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -7,12 +9,21 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -75,8 +86,9 @@ public class MainMenuBasketFragment extends Fragment {
 
         btn_order = rootView.findViewById(R.id.btn_order);
 
+        mList = getStringArrayPref_item(getContext(), "BASKET");
+        Log.d("TAG", "in Basket, mList.size() : " + mList.size());
         mRecyclerView = (RecyclerView) rootView.findViewById(R.id.recyclerView);
-        mList = ItemData.createList(5);
         mRecyclerView.setHasFixedSize(true);
         mRecyclerAdapter = new RecyclerItemAdapter(getActivity(),mList);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -93,5 +105,24 @@ public class MainMenuBasketFragment extends Fragment {
         });
         return rootView;
 
+    }
+
+    public ArrayList<ItemData> getStringArrayPref_item(Context context, String key) {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        String json = prefs.getString(key, null);
+        ArrayList<ItemData> ItemDatas = new ArrayList<ItemData>();
+        Gson gson =new GsonBuilder().create();
+        if (json != null) {
+            try {
+                JSONArray a = new JSONArray(json);
+                for (int i = 0; i < a.length(); i++) {
+                    ItemData itemData = gson.fromJson( a.get(i).toString() , ItemData.class);
+                    ItemDatas.add(itemData);
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+        return ItemDatas;
     }
 }

@@ -115,7 +115,7 @@ public class ItemInfoFragment extends Fragment {
         btn_basket.setOnClickListener(new View.OnClickListener(){ // 장바구니에 담기 버튼 클릭 시 로직
             @Override
             public void onClick(View v) {
-                mList.add(new ItemData(itemData.itemId, itemData.name, itemData.description, itemData.price, itemData.storeId)); // <----- Fragment 전환 시 받은 아이템 데이터 넣기
+                mList.add(new ItemData(itemData.itemId, itemData.name, itemData.description, itemData.price, itemData.storeId, count)); // <----- Fragment 전환 시 받은 아이템 데이터 넣기
                 // SharedPreference 값에 추가
                 // SharedPreference 에는 객체가 들어갈 수 없어서, gson 으로 변환 후 재변환해서 들고 옴.
                 ArrayList<ItemData> tmp = getStringArrayPref_item(getContext(), "BASKET");

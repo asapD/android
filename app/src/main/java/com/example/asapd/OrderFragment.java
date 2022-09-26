@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +20,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.asapd.MemberRequest.MemberContactRequest;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
+import org.json.JSONArray;
+import org.json.JSONException;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -34,7 +40,6 @@ public class OrderFragment extends Fragment {
 
     private RecyclerView mRecyclerView;
     private RecyclerItemAdapter mRecyclerAdapter;
-    private ArrayList<ItemData> mList;
     private Button btn_charge;
     private EditText et_detail_address;
     // TODO: Rename parameter arguments, choose names that match
@@ -92,34 +97,33 @@ public class OrderFragment extends Fragment {
         preferences = this.getActivity().getSharedPreferences("pref", Context.MODE_PRIVATE);
         Log.d("TAG", preferences.getString("TOKEN", "NULL"));
 
+        mlist = getStringArrayPref_item(getContext(), "BASKET");
+        mRecyclerView = (RecyclerView) rootView.findViewById(R.id.recyclerView);
+        mRecyclerView.setHasFixedSize(true);
+        mRecyclerAdapter = new RecyclerItemAdapter(getActivity(), mlist);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        mRecyclerView.setAdapter(mRecyclerAdapter);
+
         btn_charge.setOnClickListener(new View.OnClickListener() { // 결제하기 버튼 클릭 시 서버에 POST 전송
             @Override
             public void onClick(View v) {
                 String destination = et_detail_address.getText().toString();
                 HashMap<String, Integer> items = new HashMap<>();
-                // items 정보 들고 오기
-                items.put("1", 1);
-                items.put("2", 3);
-                items.put("3", 5); // item 정보 임시 삽입
-                // -> "CHECK" 장바구니에 담는건 안드로이드 단에서만 처리(따로 POST 안 함)
-                // -> SharedPreference 로 갖고 있다가 결제 완료되면 editor.delete 하면 될 듯
+
+                mlist = getStringArrayPref_item(getContext(), "BASKET");
+                for (ItemData i : mlist) {
+                    Log.d("TAG", "id : " + (int)i.getItemId()+", count : " + i.getCount());
+                    items.put((int)i.getItemId()+"", i.getCount()); // <-------- 개수를 알아야 보내는데??
+                }
 
                 OrderRequest orderRequest = new OrderRequest(destination, items);
                 sendOrderInfo(orderRequest);
 
+                removePref_item(getContext(), "BASKET");
                 Intent intent = new Intent(getActivity(), FinishChargeActivity.class);
                 startActivity(intent);
-
             }
         });
-        mRecyclerView = (RecyclerView) rootView.findViewById(R.id.recyclerView);
-        mRecyclerView.setHasFixedSize(true);
-
-        mList = ItemData.createList(5); // <- "CHECK" 실제 GET 요청으로 아이템 리스트 받아오는 코드 필요
-
-        mRecyclerAdapter = new RecyclerItemAdapter(getActivity(),mList);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        mRecyclerView.setAdapter(mRecyclerAdapter);
 
 
         return rootView;
@@ -147,4 +151,31 @@ public class OrderFragment extends Fragment {
             }
         });
     }
+
+    public ArrayList<ItemData> getStringArrayPref_item(Context context, String key) {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        String json = prefs.getString(key, null);
+        ArrayList<ItemData> ItemDatas = new ArrayList<ItemData>();
+        Gson gson =new GsonBuilder().create();
+        if (json != null) {
+            try {
+                JSONArray a = new JSONArray(json);
+                for (int i = 0; i < a.length(); i++) {
+                    ItemData itemData = gson.fromJson( a.get(i).toString() , ItemData.class);
+                    ItemDatas.add(itemData);
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+        return ItemDatas;
+    }
+
+    public void removePref_item(Context context, String key){
+        SharedPreferences prefs = context.getSharedPreferences(key, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.remove(key);
+        editor.commit();
+    }
+
 }

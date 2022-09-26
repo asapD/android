@@ -110,7 +110,7 @@ public class StoreItemFragment extends Fragment {
                         name = o.get("name").toString();
                         description = o.get("description").toString();
 
-                        mList.add(new ItemData(itemId, name, description, price, storeId));
+                        mList.add(new ItemData(itemId, name, description, price, storeId, 0));
                     }
                     mRecyclerView.setHasFixedSize(true);
                     mRecyclerAdapter = new RecyclerItemAdapter(getActivity(), mList);

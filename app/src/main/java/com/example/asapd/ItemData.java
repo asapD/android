@@ -11,13 +11,15 @@ public class ItemData implements Serializable {
     String description;
     double price;
     double storeId;
+    int count;
 
-    public ItemData(double itemId, String name, String description, double price, double storeId){
+    public ItemData(double itemId, String name, String description, double price, double storeId, int count){
         this.itemId = itemId;
         this.name = name;
         this.description = description;
         this.price = price;
         this.storeId = storeId;
+        this.count = count;
     }
 
     public double getItemId() { return itemId; }
@@ -44,11 +46,13 @@ public class ItemData implements Serializable {
     public double getStoreId() {return storeId;}
     public void setStoreId(int storeId) { this.storeId = storeId; }
 
+    public int getCount(){return count;}
+
     public static ArrayList<ItemData> createList(int num){
         ArrayList<ItemData> list = new ArrayList<ItemData>();
 
         for(int i = 1; i <= num; i++){
-            list.add(new ItemData(i,"item" + i, "content"+i, 1000+i, i));
+            list.add(new ItemData(i,"item" + i, "content"+i, 1000+i, i, 0));
         }
         return list;
     }
