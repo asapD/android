@@ -15,7 +15,7 @@
             android:id="@+id/store"
             android:layout_width="match_parent"
             android:layout_height="159dp"
-            app:srcCompat="@drawable/store" />
+            app:srcCompat="@mipmap/pablo_logo" />
 
         <View
             android:id="@+id/divider"
