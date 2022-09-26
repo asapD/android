@@ -104,7 +104,7 @@
                     tools:ignore="TouchTargetSizeCheck" />
 
                 <TextView
-                    android:id="@+id/count"
+                    android:id="@+id/tv_count"
                     android:layout_width="42dp"
                     android:layout_height="25dp"
                     android:gravity="center"
