@@ -1,17 +1,27 @@
 package com.example.asapd;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.SearchView;
 
+import com.google.gson.internal.LinkedTreeMap;
+
 import java.util.ArrayList;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -21,8 +31,10 @@ import java.util.ArrayList;
 public class MainMenuSearchFragment extends Fragment {
 
     private RecyclerView mRecyclerView;
-    private RecyclerItemAdapter mRecyclerAdapter;
-    private ArrayList<ItemData> mList;
+    private RecyclerStoreAdapter mRecyclerAdapter;
+    private ArrayList<StoreData> mList;
+
+    private SharedPreferences preferences;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -62,6 +74,7 @@ public class MainMenuSearchFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+        mList = new ArrayList<>();
     }
 
     @Override
@@ -70,13 +83,58 @@ public class MainMenuSearchFragment extends Fragment {
         // Inflate the layout for this fragment
         ViewGroup rootView = (ViewGroup)inflater.inflate(R.layout.fragment_main_menu_search, container, false);
         mRecyclerView = (RecyclerView) rootView.findViewById(R.id.recyclerView);
+        preferences = this.getActivity().getSharedPreferences("pref", Context.MODE_PRIVATE);
 
-        mList = ItemData.createList(5);
-        mRecyclerView.setHasFixedSize(true);
-        mRecyclerAdapter = new RecyclerItemAdapter(getActivity(),mList);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        mRecyclerView.setAdapter(mRecyclerAdapter);
-
+        sendGetStore();
         return rootView;
+    }
+
+    private void sendGetStore(){
+        RetrofitClient.getApiService().getStores(preferences.getString("TOKEN", "NULL")).enqueue(new Callback<StoreResponse>() {
+            @Override
+            public void onResponse(Call<StoreResponse> call, Response<StoreResponse> response) {
+                StoreResponse result = response.body();
+                if(result.getStatus() == 200){
+                    Log.d("TAG", result.getMessage());
+                    ArrayList<LinkedTreeMap<String, Object>> orderList = (ArrayList<LinkedTreeMap<String, Object>>) result.getData().get("content");
+
+                    double storeId, owner;
+                    String name, address;
+                    for (LinkedTreeMap<String, Object> o : orderList) {
+                        storeId = (double) o.get("storeId");
+                        name = o.get("name").toString();
+                        owner = (double) o.get("owner");
+                        address = o.get("address").toString();
+
+                        mList.add(new StoreData(storeId, name, owner, address));
+                    }
+                    mRecyclerView.setHasFixedSize(true);
+                    mRecyclerAdapter = new RecyclerStoreAdapter(getActivity(), mList);
+                    mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+                    mRecyclerView.setAdapter(mRecyclerAdapter);
+
+                    mRecyclerAdapter.setOnItemClickListener(new RecyclerStoreAdapter.OnItemClickListener() {
+                        @Override
+                        public void onItemClicked(View v, int pos) { //
+                            FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+                            StoreItemFragment storeItemFragment = new StoreItemFragment();
+                            transaction.replace(R.id.menu_frame_layout, storeItemFragment);
+                            transaction.commit();
+                        }
+                    });
+
+                    Log.d("TAG", mList.get(0).storeId+"");
+                    Log.d("TAG", mList.get(0).name);
+                    Log.d("TAG", mList.get(0).owner+"");
+                    Log.d("TAG", mList.get(0).address);
+                    Log.d("TAG", "Sizeof mList(Inside) : " + mList.size());
+                }
+                else { Log.d("TAG", result.getMessage()); }
+
+            }
+
+            @Override
+            public void onFailure(Call<StoreResponse> call, Throwable t) { }
+        });
     }
 }
