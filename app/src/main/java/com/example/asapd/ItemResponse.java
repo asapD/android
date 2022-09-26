@@ -6,7 +6,7 @@ import java.util.HashMap;
 public class ItemResponse {
     private final Integer status;
     private String message;
-    private HashMap<String, ArrayList> data;
+    private HashMap<String, Object> data;
 
     public Integer getStatus() {
         return status;
@@ -14,11 +14,11 @@ public class ItemResponse {
     public String getMessage() {
         return message;
     }
-    public HashMap<String, ArrayList> getData() {
+    public HashMap<String, Object> getData() {
         return data;
     }
 
-    public ItemResponse(Integer status, String message, HashMap<String, ArrayList> data){
+    public ItemResponse(Integer status, String message, HashMap<String, Object> data){
         this.status = status;
         this.message = message;
         this.data = data;

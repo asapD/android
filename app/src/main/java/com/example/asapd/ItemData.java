@@ -1,49 +1,54 @@
 package com.example.asapd;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class ItemData {
-    int resId; //이미지 데이터
+public class ItemData implements Serializable {
+    double itemId;
     String name;
-    String content;
+    String description;
+    double price;
+    double storeId;
 
-    public ItemData(int resId, String title, String content) {
-        this.resId = resId;
-        this.name= title;
-        this.content = content;
+    public ItemData(double itemId, String name, String description, double price, double storeId){
+        this.itemId = itemId;
+        this.name = name;
+        this.description = description;
+        this.price = price;
+        this.storeId = storeId;
     }
 
-    public String getTitle() {
+    public double getItemId() { return itemId; }
+    public void setItemId(int itemId) { this.itemId = itemId; }
+    public String getName() {
         return name;
     }
+    public void setName(String name) { this.name = name; }
 
-    public void setTitle(String name) {
-        this.name = name;
+    public String getDescription() {
+        return description;
+    }
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public String getContent() {
-        return content;
+    public double getPrice() {
+        return price;
+    }
+    public void setPrice(int price) {
+        this.price = price;
     }
 
-    public void setContent(String content) {
-        this.content = content;
-    }
-
-    public int getResId() {
-        return resId;
-    }
-
-    public void setResId(int resId) {
-        this.resId = resId;
-    }
+    public double getStoreId() {return storeId;}
+    public void setStoreId(int storeId) { this.storeId = storeId; }
 
     public static ArrayList<ItemData> createList(int num){
         ArrayList<ItemData> list = new ArrayList<ItemData>();
 
         for(int i = 1; i <= num; i++){
-            list.add(new ItemData(R.drawable.item,"item" + i, "content"));
+            list.add(new ItemData(i,"item" + i, "content"+i, 1000+i, i));
         }
         return list;
     }

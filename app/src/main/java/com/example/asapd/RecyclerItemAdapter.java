@@ -16,7 +16,7 @@ import java.util.ConcurrentModificationException;
 
 public class RecyclerItemAdapter extends RecyclerView.Adapter<RecyclerItemAdapter.ViewHolder> {
 
-    private ArrayList<ItemData> mList =  new ArrayList<>();
+    private ArrayList<ItemData> mList;
     private Context context;
 
     public RecyclerItemAdapter(Context context, ArrayList<ItemData> mList) {
@@ -24,21 +24,21 @@ public class RecyclerItemAdapter extends RecyclerView.Adapter<RecyclerItemAdapte
         this.mList = mList;
     }
 
-    private RecyclerStoreAdapter.OnItemClickListener itemClickListener;
+    private OnItemClickListener itemClickListener;
 
     public interface OnItemClickListener{
         void onItemClicked(View v, int pos);
     }
 
 
-    public void setOnItemClickListener(RecyclerStoreAdapter.OnItemClickListener listener){
+    public void setOnItemClickListener(OnItemClickListener listener){
         itemClickListener = listener;
     }
 
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public RecyclerItemAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_list, parent, false);
-        return new ViewHolder(view);
+        return new RecyclerItemAdapter.ViewHolder(view);
     }
 
     @Override
@@ -57,13 +57,15 @@ public class RecyclerItemAdapter extends RecyclerView.Adapter<RecyclerItemAdapte
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
-        TextView title;
-        TextView content;
+        TextView tv_name;
+        TextView tv_description;
+        TextView tv_price;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            title = (TextView) itemView.findViewById(R.id.name);
-            content = (TextView) itemView.findViewById(R.id.address);
+            tv_name = (TextView) itemView.findViewById(R.id.tv_name);
+            tv_description = (TextView) itemView.findViewById(R.id.tv_description);
+            tv_price = (TextView) itemView.findViewById(R.id.tv_price);
 
             itemView.setOnClickListener(new View.OnClickListener(){
                 @Override
@@ -79,8 +81,9 @@ public class RecyclerItemAdapter extends RecyclerView.Adapter<RecyclerItemAdapte
         }
 
         void onBind(ItemData item){
-            title.setText(item.getTitle());
-            content.setText(item.getContent());
+            tv_name.setText(item.getName());
+            tv_description.setText(item.getDescription());
+            tv_price.setText((CharSequence) (item.getPrice()+""));
         }
     }
 }
