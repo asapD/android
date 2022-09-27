@@ -1,10 +1,14 @@
 package com.example.asapd;
 
+import android.Manifest;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.SystemClock;
@@ -15,6 +19,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -42,12 +47,19 @@ public class FinishChargeActivity extends AppCompatActivity {
     final static int BT_REQUEST_ENABLE = 1;
     final static int BT_MESSAGE_READ = 2;
     final static int BT_CONNECTING_STATUS = 3;
-    final static UUID BT_UUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
-
+//    final static UUID BT_UUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
+    final static UUID BT_UUID = UUID.fromString("8CE255C0-200A-11E0-AC64-0800200C9A66");
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_finish_charge);
+
+//        mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+//        if (!mBluetoothAdapter.isEnabled()) {
+//            Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+//            startActivityForResult(enableBtIntent, BT_REQUEST_ENABLE);
+//        }
+
         mBtnBluetoothOn = (Button)findViewById(R.id.btnBluetoothOn);
         mBtnBluetoothOff = (Button)findViewById(R.id.btnBluetoothOff);
         mBtnConnect = (Button)findViewById(R.id.btnConnect);
@@ -82,6 +94,7 @@ public class FinishChargeActivity extends AppCompatActivity {
     }
 
     void bluetoothOn() {
+        mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         if(mBluetoothAdapter == null) {
             Toast.makeText(getApplicationContext(), "블루투스를 지원하지 않는 기기입니다.", Toast.LENGTH_LONG).show();
         }
@@ -98,6 +111,7 @@ public class FinishChargeActivity extends AppCompatActivity {
         }
     }
     void bluetoothOff() {
+        mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         if (mBluetoothAdapter.isEnabled()) {
             mBluetoothAdapter.disable();
             Toast.makeText(getApplicationContext(), "블루투스가 비활성화 되었습니다.", Toast.LENGTH_SHORT).show();

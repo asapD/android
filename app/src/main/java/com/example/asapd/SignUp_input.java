@@ -2,6 +2,7 @@ package com.example.asapd;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.telephony.PhoneNumberFormattingTextWatcher;
 import android.text.InputType;
@@ -89,6 +90,9 @@ public class SignUp_input extends AppCompatActivity {
                     MemberSignUpRequest memberSignUpRequest = new MemberSignUpRequest(name,contact,email,pw);
                     startSignUp(memberSignUpRequest);
                 }
+
+                Intent intent = new Intent(getApplicationContext(), SignUp_fin.class);
+                startActivity(intent);
             }
         });
 
