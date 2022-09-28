@@ -42,6 +42,9 @@ public interface RetrofitAPI {
     @GET("api/store")
     Call<StoreResponse> getStores (@Header("Authorization") String authCode);
 
+    @POST("api/orders/verify-serial")
+    Call<OrderResponse> verifySerialNum (@Header("Authorization") String authCode, @Body SerialNumRequest serialNumRequest);
+
 
 
 }
